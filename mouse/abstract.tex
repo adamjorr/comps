@@ -3,7 +3,10 @@
 \usepackage[letterpaper,margin=.5in]{geometry}
 \usepackage{url}
 \usepackage{graphicx}
-\usepackage{helvet}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[scaled]{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 \pagenumbering{gobble}
 
@@ -35,6 +38,15 @@
 
 \section{Abstract}
 
-Cancer is a devastating disease that affects millions. The disease is caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system. Despite this fact, little is known about somatic mutations themselves, particularly in mammals. 
+Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system. Despite this fact, little is known about somatic mutations themselves, particularly in mammals.
+One reason somatic mutations have been difficult to study is that they are exceedingly rare, making them difficult to confidently detect. This problem is exacerbated by sequencing error rates that are orders of magnitude higher than somatic mutation rates.
+However, recent advances in sequencing technology and computational methods make such a problem tractable.
+The proposed project will develop methods to detect somatic mutations and elucidate how somatic mutations are produced and spread in normal mice and a cancer model of mice.
+\textbf{Aim 1} of the project is to test the hypothesis that tissue renewal rate is positively correlated with somatic mutation rate.
+To test this hypothesis, various mouse tissue will be collected and sequenced in triplicate, and somatic variants and the somatic mutation rate will be detected by a novel bioinformatic pipeline. 
+\textbf{Aim 2} of the project is to test the hypothesis that genes that are epigenetically silenced are mutated at a lower rate than other genes.
+To test this hypothesis, tissues will be collected as for Aim 1; however, an ATAC-seq protocol will be employed to estimate the level of chromatin accessibility with base-pair level resolution.
+Such results will improve the understanding of how somatic mutations are formed and will impact the work of cancer and developmental biologists.
+
 
 \end{document}
