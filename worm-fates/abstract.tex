@@ -10,7 +10,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \pagenumbering{gobble}
 
-\title{Evaluating the Accuracy of Sequencing-based Cell Lineage Tracing}
+\title{Cell Lineage Tracing by Whole Genome Sequencing}
 \date{}
 % \date{\today}
 % \author{Adam Orr}
@@ -40,16 +40,18 @@
 
 Cell lineage tracing is the practice of determining how each cell in an adult organism arises from the single progenitor zygotic cell.
 The practice is commonly used in stem cell studies and studies of cancer heterogeneity.
-Usually, the practice is done by direct observation of a marked cell and its decendants.
-There is interest in sequencing somatic variants in decendant cells to infer cell lineages in environments that make direct observation intractable, such as in humans.
-Such 
+Usually, tracing is performed by direct observation of a marked cell and its decendants.
+There is interest in sequencing somatic variants in decendant cells to infer cell lineages in environments that make direct observation or genetic manipulation intractable, such as in humans.
+Some successful approaches in mouse use microsatellite markers, but such methods are not generally extendable.
+For example, the number of microsatellites in the \textit{C. elegans} genome is likely not sufficient to reliably produce a cell fate map with microsatellite sequencing.
+However, the detailed \textit{C. elegans} cell fate map provides an excellent opportunity to create a generic method for reconstructing cell lineages via whole genome sequencing. 
 % Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system.
 % Despite this fact, little is known about how somatic mutations are produced and spread.
 
-\textbf{Aim 1} of the project is to test the hypothesis that tissue proliferation rate is positively correlated with somatic mutation rate.
-To test this hypothesis, various mouse tissue will be collected and sequenced in triplicate, and somatic variants and the somatic mutation rate will be determined by a novel bioinformatic pipeline.
-The somatic mutation rates of each tissue will then be compared to the tissue proliferation rate.
-\textbf{Aim 2} of the project is to test the hypothesis that tissues destined to become cancerous have higher somatic mutation rates than similar noncancerous tissues.
+\textbf{Aim 1} of the project is to develop a method of inferring cell fate maps from whole-genome sequencing data.
+To test this hypothesis, \textit{C. elegans} transformed with multiple fluorescently-labeled, tissue-specific 
+
+\textbf{Aim 2} of the project is to test the hypothesis that distances in cell lineage trees derived from whole genome data more closely correlate to 
 To test this hypothesis, the somatic mutation rates calculated for Aim 1 for each tissue will be compared between the different genetic backgrounds of mice.
 These results will improve the understanding of how somatic mutations arise and will impact the work of cancer and developmental biologists.
 
