@@ -45,22 +45,26 @@
 % * How are tissues destined to become cancerous, and how would you know that from the samples you've collected? 
 % * How are you distinguishing wild type genome? Will you have pedigrees? 
 
+%lung, colon, and stomach?
+%
 
 \section{Abstract}
 Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system.
 Despite this fact, little is known about somatic mutations themselves.
 Of particular interest are how the differences between somatic tissues contribute to differences in cancer rates between tissues.
 A potential explanation for this observation is the differential epigenetic states of different tissues.
-This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations, which then affects the 
-
-
-\texbf{Aim 1} of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
-This will be done by applying whole-genome sequencing and an ATAC-seq protocol to samples of various mouse tissue from a wild-type mouse and a mouse model of cancer.
-% A novel bioinformatic pipeline will then be developed to detect mutations and compare mutation density with chromatin density.
-\textbf{Aim 2} of this project is to test the hypothesis that the distribution of mutations is significantly altered in the tissue at risk to become cancerous, but not in the other tissues of the cancer model.
-This hypothesis will be tested using the mutations and locations found for Aim 1.
-The distribution of mutations in each tissue will be compared to the distribution of mutations in the wild-type genotype.
-These results will improve the understanding of how somatic mutations arise and will impact the work of cancer and developmental biologists.
+This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations, which then affects the incidence of cancer.
+\textbf{Aim 1} of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
+This will be done by incorporating replicate libraries for each tissue type in order to confidently detect somatic mutations.
+The coverage of reads sequenced via an ATAC-seq protocol will then serve as an estimate of chromatin accessibility.
+Then, the distribution of chromatin accessibility for each mutation detected can be estimated for each sample.
+\textbf{Aim 2} of this project is to test the hypothesis that chromatin accessibility significantly impacts mutation rate.
+This will be done by applying whole-genome sequencing and an ATAC-seq protocol to tissue samples from two types of mouse models of cancer.
+Additionally, the same procedure will be performed on a mouse with the same genetic background except for the targeted modifications made to model disease as a control.
+The pipeline developed for Aim 1 will be applied to measure the distribution of chromatin accessibility of the mutations in each sample.
+If this distribution is not significantly different in tissues of normal and elevated cancer risk, the hypothesis is supported as mutations occur at approximately equal rates at similar chromatin accessibility levels.
+However, if the distribution is significantly different, the hypothesis is not supported.
+These results will improve the understanding of the role chromatin plays in mutation and will impact the work of cancer and developmental biologists.
 
 
 
