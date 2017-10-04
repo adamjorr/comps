@@ -17,28 +17,28 @@
 %lung, colon, and stomach?
 
 \begin{document}
-\section{Title}
-\maketitle
+% \section{Title}
+% \maketitle
 
-\section{Project Summary/Abstract} % 30 lines of text
+% % \section{Project Summary/Abstract} % 30 lines of text
 
-Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system.
-Despite this fact, little is known about somatic mutations themselves.
-Of particular interest are how the differences between somatic tissues contribute to differences in cancer rates between tissues.
-A potential explanation for this observation is the differential epigenetic states of different tissues.
-While mutations appear to correlate with chromatin accessibility in cancer tumors, it is not apparent whether this correlation is present in noncancerous cells.
-This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations and to investigate how this affects the incidence of cancer.
-\textbf{Aim 1} of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
-This will be done by incorporating replicate libraries for each tissue type in order to confidently detect somatic mutations.
-The coverage of reads sequenced via an ATAC-seq protocol will then serve as an estimate of chromatin accessibility.
-Then, the distribution of chromatin accessibility for each mutation detected can be estimated for each sample.
-\textbf{Aim 2} of this project is to test the hypothesis that chromatin accessibility significantly impacts mutation rate.
-This will be done by applying whole-genome sequencing and an ATAC-seq protocol to tissue samples from two types of mouse models of cancer.
-Additionally, the same procedure will be performed on a mouse with the same genetic background except for the targeted modifications made to model disease as a control.
-The pipeline developed for Aim 1 will be applied to measure the distribution of chromatin accessibility of the mutations in each sample.
-If this distribution is not significantly different in tissues of normal and elevated cancer risk, the hypothesis is supported as mutations occur at approximately equal rates at similar chromatin accessibility levels.
-However, if the distribution is significantly different, the hypothesis is not supported.
-These results will improve the understanding of the role chromatin plays in mutation and will impact the work of cancer and developmental biologists.
+% % Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system.
+% % Despite this fact, little is known about somatic mutations themselves.
+% % Of particular interest are how the differences between somatic tissues contribute to differences in cancer rates between tissues.
+% % A potential explanation for this observation is the differential epigenetic states of different tissues.
+% % While mutations appear to correlate with chromatin accessibility in cancer tumors, it is not apparent whether this correlation is present in noncancerous cells.
+% % This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations and to investigate how this affects the incidence of cancer.
+% % \textbf{Aim 1} of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
+% % This will be done by incorporating replicate libraries for each tissue type in order to confidently detect somatic mutations.
+% % The coverage of reads sequenced via an ATAC-seq protocol will then serve as an estimate of chromatin accessibility.
+% % Then, the distribution of chromatin accessibility for each mutation detected can be estimated for each sample.
+% % \textbf{Aim 2} of this project is to test the hypothesis that chromatin accessibility significantly impacts mutation rate.
+% % This will be done by applying whole-genome sequencing and an ATAC-seq protocol to tissue samples from two types of mouse models of cancer.
+% % Additionally, the same procedure will be performed on a mouse with the same genetic background except for the targeted modifications made to model disease as a control.
+% % The pipeline developed for Aim 1 will be applied to measure the distribution of chromatin accessibility of the mutations in each sample.
+% % If this distribution is not significantly different in tissues of normal and elevated cancer risk, the hypothesis is supported as mutations occur at approximately equal rates at similar chromatin accessibility levels.
+% % However, if the distribution is significantly different, the hypothesis is not supported.
+% % These results will improve the understanding of the role chromatin plays in mutation and will impact the work of cancer and developmental biologists.
 
 \section{Specific Aims} %1 page
 % State concisely the goals of the proposed research and summarize the expected outcome(s),
@@ -56,8 +56,20 @@ Thus, cancer incidence can be impacted by increasing the rate of mutation \texti
 While the role of nonspecific mutagens in oncogenesis has been thoroughly studied, the role of factors that could change the distribution of somatic mutations has not.
 
 %talk about clues in chromatin association and differences in tissue chromatin str.
+Recent work has revealed that the locations of mutations in cancer tumors are associated with regions of high chromatin accessibility.
+To fit in the nucleus, Eukaryotic DNA is bound to histones and packaged into chromatin.
+The DNA may be in a loosely bound, high accessibility state to allow DNA-binding factors to access the DNA.
+The DNA may also be in a tightly bound, low accessibility state that restricts the ability of proteins to access the DNA.
+Levels of chromatin accessibility vary with levels of gene regulation; low accessibility is associated with repressed genes and high accessibility is associated with actively expressed genes.
+One of the most important sources of variability in chromatin structure is tissue differentiation.
+Different tissues express particular genes and repress others by decreasing DNA accessibility.
+If chromatin accessibility affects the location of mutations, and locations with high levels of accessibility vary by tissue, the locations of somatic mutations could vary in different tissues.
+If there is variation in chromatin accessibility at oncogenes and tumor suppressor genes, this variation could cause differential risk of cancer for different tissues.
+This hypothesis consistent with the observation that different tissues have different rates of cancer.
 
+However, it is still unclear whether these associations form only after the tissue becomes cancerous. 
 
+%This project aims to...
 
 
 
