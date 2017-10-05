@@ -1,91 +1,32 @@
-\documentclass[12pt]{article}
-\usepackage{amsmath}
-\usepackage[letterpaper,margin=.5in]{geometry}
-\usepackage{url}
-\usepackage{graphicx}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage[scaled]{helvet}
-\renewcommand{\familydefault}{\sfdefault}
-\pagenumbering{gobble}
-
-\title{Investigating the Influence of Chromatin on the Distribution of Somatic Mutations}
-\date{}
-% \date{\today}
-% \author{Adam Orr}
+\input{header}
 %lung, colon, and stomach?
 
 \begin{document}
 % \section{Title}
 % \maketitle
 
-% % \section{Project Summary/Abstract} % 30 lines of text
+\section{Project Summary/Abstract} % 30 lines of text
 
-% % Cancer is a devastating disease caused by mutations in somatic cells that cause those cells to rapidly proliferate and evade the immune system.
-% % Despite this fact, little is known about somatic mutations themselves.
-% % Of particular interest are how the differences between somatic tissues contribute to differences in cancer rates between tissues.
-% % A potential explanation for this observation is the differential epigenetic states of different tissues.
-% % While mutations appear to correlate with chromatin accessibility in cancer tumors, it is not apparent whether this correlation is present in noncancerous cells.
-% % This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations and to investigate how this affects the incidence of cancer.
-% % \textbf{Aim 1} of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
-% % This will be done by incorporating replicate libraries for each tissue type in order to confidently detect somatic mutations.
-% % The coverage of reads sequenced via an ATAC-seq protocol will then serve as an estimate of chromatin accessibility.
-% % Then, the distribution of chromatin accessibility for each mutation detected can be estimated for each sample.
-% % \textbf{Aim 2} of this project is to test the hypothesis that chromatin accessibility significantly impacts mutation rate.
-% % This will be done by applying whole-genome sequencing and an ATAC-seq protocol to tissue samples from two types of mouse models of cancer.
-% % Additionally, the same procedure will be performed on a mouse with the same genetic background except for the targeted modifications made to model disease as a control.
-% % The pipeline developed for Aim 1 will be applied to measure the distribution of chromatin accessibility of the mutations in each sample.
-% % If this distribution is not significantly different in tissues of normal and elevated cancer risk, the hypothesis is supported as mutations occur at approximately equal rates at similar chromatin accessibility levels.
-% % However, if the distribution is significantly different, the hypothesis is not supported.
-% % These results will improve the understanding of the role chromatin plays in mutation and will impact the work of cancer and developmental biologists.
+\input{abstract}
+
+\clearpage
 
 \section{Specific Aims} %1 page
-% State concisely the goals of the proposed research and summarize the expected outcome(s),
-% including the impact that the results of the proposed research will have on the research field(s)
-% involved.
-% List succinctly the specific objectives of the research proposed (e.g., to test a stated hypothesis,
-% create a novel design, solve a specific problem, challenge an existing paradigm or clinical practice,
-% address a critical barrier to progress in the field, or develop new technology)
 
-Somatic mutations are mutations that occur in the soma.
-Though they occur infrequently, the size of mammalian genomes means approximately one somatic mutation occurs every time a cell divides.
-As these mutations are not heritable, they usually do not impact the organism harboring these mutations.
-However, the somatic mutation theory of cancer suggests that somatic cells accumulate mutations until a sufficient number of mutations in oncogenes or tumor suppressor genes cause the mutated cell to become cancerous.
-Thus, cancer incidence can be impacted by increasing the rate of mutation \textit{or} increasing the probability of mutation in an oncogene or tumor suppressor gene.
-While the role of nonspecific mutagens in oncogenesis has been thoroughly studied, the role of factors that could change the distribution of somatic mutations has not.
-
-%talk about clues in chromatin association and differences in tissue chromatin str.
-Recent work has revealed that the locations of mutations in cancer tumors are associated with regions of high chromatin accessibility.
-To fit in the nucleus, Eukaryotic DNA is bound to histones and packaged into chromatin.
-The DNA may be in a loosely bound, high accessibility state to allow DNA-binding factors to access the DNA.
-The DNA may also be in a tightly bound, low accessibility state that restricts the ability of proteins to access the DNA.
-Levels of chromatin accessibility vary with levels of gene regulation; low accessibility is associated with repressed genes and high accessibility is associated with actively expressed genes.
-One of the most important sources of variability in chromatin structure is tissue differentiation.
-Different tissues express particular genes and repress others by decreasing DNA accessibility.
-If chromatin accessibility affects the location of mutations, and locations with high levels of accessibility vary by tissue, the locations of somatic mutations could vary in different tissues.
-If there is variation in chromatin accessibility at oncogenes and tumor suppressor genes, this variation could cause differential risk of cancer for different tissues.
-This hypothesis consistent with the observation that different tissues have different rates of cancer.
-
-However, it is still unclear whether these associations form only after the tissue becomes cancerous. 
-
-%This project aims to...
-
-
-
-Despite their potential to induce tumorigenesis, somatic mutations in healthy cells are poorly understood.
-An important cause of this knowledge gap is the difficulty of detecting somatic mutations.
-While mutations appear to correlate with chromatin accessibility in cancer tumors, it is not apparent whether this correlation is present in noncancerous cells.
-This project will explore how the distribution of accessible chromatin in different tissues affects the distribution of somatic mutations and to investigate how this affects the incidence of cancer.
-
-
+\input{aims}
 
 \section{Research Strategy} %6 pages
+\subsection{Significance}
+\subsubsection{Aim 1}
+\subsubsection{Aim 2}
 % 1. Significance
 % Explain the importance of the problem or critical barrier to progress that the proposed project addresses.
 % Explain how the proposed project will improve scientific knowledge, technical capability, and/or clinical practice in one or more broad fields.
 % Describe how the concepts, methods, technologies, treatments, services, or preventative interventions that drive this field will be changed if the proposed aims are achieved.
 
+\subsection{Approach}
+\subsubsection{Aim 1}
+\subsubsection{Aim 2}
 % 2. Approach
 % Describe the overall strategy, methodology, and analyses to be used to accomplish the specific aims of the project. Unless addressed separately in the Resource Sharing Plan attachment, include how the data will be collected, analyzed, and interpreted as well as any resource sharing plans as appropriate.
 % Discuss potential problems, alternative strategies, and benchmarks for success anticipated to achieve the aims.
@@ -93,6 +34,7 @@ This project will explore how the distribution of accessible chromatin in differ
 % Point out any procedures, situations, or materials that may be hazardous to personnel and the precautions to be exercised. A full discussion on the use of select agents should appear in the Select Agent Research attachment below.
 
 % If you have multiple Specific Aims, you may address Significance, Innovation, and Approach either for each Specific Aim individually or for all of the Specific Aims collectively. As applicable, also include the following information as part of the Research Strategy, keeping within the three sections (Significance, Innovation, and Approach) listed above.
+
 
 
 
