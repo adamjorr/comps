@@ -20,7 +20,7 @@
 \section{Research Strategy} %6 pages
 \subsection{Significance}
 
-% why study somatic mutation and its relationship to chromatin accessibility?
+% why study somatic mutation?
 Somatic mutations are mutations that occur in somatic cells, and as such are not passed to offspring.
 These mutations arise due to errors in DNA replication preceding cell division.
 While the DNA replication and error repair machinery is highly accurate, mutations occur at high enough frequencies to be significant.
@@ -31,28 +31,54 @@ This theory posits that cancers arise in multicellular organisms when somatic ce
 Important mutations in oncogenes cause them to be over activated, promoting unnecessary cell proliferation.
 In contrast, relevant mutations in tumor suppressor genes cause them to lose functionality, inhibiting their ability to limit cell proliferation.
 Once a sufficient number of these mutations accumulate, the cell divides rapidly and accumulates even more somatic mutations, severely destabilizing the genome.
+Thus, understanding how somatic mutations accumulate in healthy cells is vital to understanding the onset and progression of cancer. 
 
-While there has been a large body of work on the generation of somatic mutations in the presence of mutagens, much less is known about the endogenous process that generates somatic mutations--that is, the process that generates somatic mutations even in cells that are never exposed to mutagens or unusual stress.
-% Despite the critical role somatic mutations play in tumorigenesis, these mutations are usually studied only in tumors, as there are a sufficient number of mutations that a significant number can be detected at modest sequencing depth.
-% However, most of these mutations did not cause the tumor, and occur only after the tumor has formed.
-This impedes researchers' ability to detect significant departures from healthy levels and patterns of somatic mutation;
-a significant amount of energy is expended in differentiating non-pathogenic "passenger" mutations from the "driver" mutations that actually contribute to tumor formation.
-This knowledge gap is largely due to the technical difficulty of detecting somatic mutations in healthy tissues.
-In any sample of healthy tissue, the number of somatic mutations within the sample is expected to be orders of magnitude smaller than the number of sequencing errors.
-A reliable method of detecting somatic mutations in healthy cells and non-tumor samples will enable researchers to study somatic mutations in healthy tissue, improving their ability to distinguish between natural patterns of somatic variation and unhealthy levels of somatic variation indicative of disease.
+%why study chromatin accessibility?
+A similarly important factor required for the onset of cancer is the deregulation of chromatin.
+The chromatin state in a region of the genome is determined by the organization of the nucleosomes in the region.
+These nucleosomes are composed of histones, which bind and organize a segment of DNA.
+While the function of higher orders of organization is not well understood, the function and impact of different chromatin states is clear.
+Chromatin takes two important possible states: heterochromatin, in which the DNA is tightly packaged; and euchromatin, in which the DNA is loosely packaged.
+In the heterochromatin state, translation is repressed as the DNA is inaccessible to translation proteins.
+In the euchromatin state, translation can occur as the DNA is available for translation complexes to bind.
 
-% take cancer biology from purely historical to active 
+As the chromatin state significantly impacts translational ability, and different tissues must express different genes to maintain their identity, different tissues have different distributions of chromatin states.
+The process of switching between these states is known as chromatin remodeling.
+As cancers require normally silenced genes to be expressed, misregulated chromatin remodeling is important for tumorigenesis.
+In fact, many genes implicated as oncogenes or tumor suppressor genes have functions important for chromatin remodeling.
+As such, understanding how these epigenetic changes cause disease is vital to understanding and preventing cancer.
 
-% why study somatic mutation?
 
-% why study chromatin accessibility?
+% why study the interface of somatic mutation and chromatin accessibility?
+Thus, it is apparent that a comprehensive understanding of cancer onset requires integrating both somatic mutation and epigenetic misregulation.
+The somatic mutation theory of cancer can explain both components, as mutations in chromatin remodeling proteins can cause the large-scale changes in expression required for tumors to form and thrive.
+Some critics claim that the theory inadequately explains how the requisite mutations are obtained.
+As somatic mutations occur at very low frequency, the probability of accumulating the number of required mutations in the correct sites and within the same cell is low.
+A potential resolution to this inconsistency is the observation that mutation rates are not evenly distributed across the genome.
+That is, mutation rates could be high enough in regions that contain oncogenes and tumor suppressor genes that mutating a sufficient number of them can occur with probabilities consistent with rates of cancer incidence.
+
+Recently, many groups have reported a strong association between regional variation in somatic mutation rates in tumors and chromatin states in that region.
+This pattern has also been seen in germline mutations.
+Thus, it is highly likely that chromatin states impact local mutation rates in healthy somatic tissues as well.
+Because chromatin remodeling is an important aspect of cell differentiation, different tissues have different patterns of chromatin states.
+This implies that different tissues have different distributions of mutation rates.
+
+One observation that indicates that this difference may be significant for studying cancer is that different tissues have different rates of cancer incidence.
+There is debate about how much of this difference can be attributed to difference in cell division rates between different tissues.
+However, differences in chromatin states of oncogenes and tumor suppressor genes in healthy somatic tissue may play an important role.
 
 % Aim 1 of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
 \subsubsection{Aim 1}
 
 % why do we need a method to jointly detect somatic mutations and chromatin accessibility?
+Despite the central role of somatic mutations in cancer development, they remain difficult to study.
+However, if a relationship between chromatin accessibility and mutation rate exists, this can be explicitly modeled to improve detection of somatic mutations.
+At the same time, sequencing-based assays of chromatin accessibility hold underlying genotype information.
+Thus, considering both types of data at the same time and integrating information from both data sources into a model will increase the ability of the researcher to sensitively and accurately detect somatic mutations.
 
 % how will this method change the field if it is achieved?
+% reduce sequencing costs - less covg necessary initially, doesn't throw away  information from ATAC-seq
+% 
 
 %%%%%%%%%%%%% aim 2 %%%%%%%%%%%%%%%%
 
@@ -76,6 +102,18 @@ A reliable method of detecting somatic mutations in healthy cells and non-tumor 
 %
 
 \subsubsection{Aim 1}
+
+While there has been a large body of work on the generation of somatic mutations in the presence of mutagens, much less is known about the endogenous process that generates somatic mutations--that is, the process that generates somatic mutations even in cells that are never exposed to mutagens or unusual stress.
+% Despite the critical role somatic mutations play in tumorigenesis, these mutations are usually studied only in tumors, as there are a sufficient number of mutations that a significant number can be detected at modest sequencing depth.
+% However, most of these mutations did not cause the tumor, and occur only after the tumor has formed.
+This impedes researchers' ability to detect significant departures from healthy levels and patterns of somatic mutation; a significant amount of energy is expended in differentiating non-pathogenic "passenger" mutations from the "driver" mutations that actually contribute to tumor formation.
+This knowledge gap is largely due to the technical difficulty of detecting somatic mutations in healthy tissues.
+In any sample of healthy tissue, the number of somatic mutations within the sample is expected to be orders of magnitude smaller than the number of sequencing errors.
+A reliable method of detecting somatic mutations in healthy cells and non-tumor samples will enable researchers to study somatic mutations in healthy tissue, improving their ability to distinguish between natural patterns of somatic variation and unhealthy levels of somatic variation indicative of disease.
+
+% take cancer biology from purely historical to active 
+
+% if mutations coincide with chromatin accessibility, that can be modeled.
 
 % what's new about software that detects somatic mutations and estimates chromatin accessibility?
 
