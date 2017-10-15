@@ -48,30 +48,56 @@
 			\begin{outline}
 				\item The Somatic Mutation Theory doesn't explain how a sufficient number of somatic mutations accumulate \parencite{baker_cancer_2015}
 				\item Variation in somatic tissue division rates explains a large proportion of variation in incidence by tissue \parencite{tomasetti_variation_2015} implying cancer is caused by mutations that occur during cell division, but there is disagreement \parencite{rozhok_critical_2015, wang_implications_2015}
-				\item Our understanding of the rate of somatic mutations, and how that changes in different types of cells, is limited \parencite{stratton_cancer_2009}
+				\item Our understanding of the rate of somatic mutations and how that rate changes in different types of cells is limited \parencite{stratton_cancer_2009}
 			\end{outline}
 		\end{outline}
 		\item The role of chromatin states in somatic mutation
+		\begin{outline}
+			\item Analysis of neutrally-evolving regions suggests that several measurements of epigenetic states are associated with variation in local mutation rate in the germline \parencite{makova_effects_2015}
+			\item Hi-C analysis combined with cancer genome data has suggested high-level chromatin organization contributes to simultaneous point mutations in protein-coding genes \parencite{shi_chromatin_2016}
+			\item A single histone modification H3K9me3 can account for nearly 40\% of variation in regional point mutation rates in cancer cells \parencite{schuster-bockler_chromatin_2012}
+			\item Cytosine to Thymine mutations caused by deamination at mehtylated CpG sites is associated with common driver mutations in colorectal and ovarian cancers \parencite{gold_somatic_2017}
+		\end{outline}
 		\item Measuring chromatin states
 		\begin{outline}
-			\item Sequence Characteristics
+			\item Sequence Characteristics \parencite{makova_effects_2015}
+			\begin{outline}
+				\item GC content
+				\item Sex chromosome vs. autosome
+				\item Exon density
+				\item Recombination rate
+				\item Distance to telomere
+				\item Microsatellite density
+				\item Density of histone modifications
+			\end{outline}
+			\item Mutation Types Associated with Chromatin States
+			\begin{outline}
+				\item foo
+			\end{outline}
 			\item Next-Gen Sequencing Assays
 			\begin{outline}
+				\item DNase-seq
 				\item ATAC-seq
 			\end{outline}
 		\end{outline}
-		\item Mutation Types Associated with Chromatin States
 	\end{outline}
 	\item Innovation
 	\begin{outline}
-		\item foo
+		\item Base-pair resolution of actual chromatin accessibility - not proxy of accessibility
+		\item Sampling strategy allows analysis in healthy somatic cells rather than germline or cancer cells, which could be different.
+		\item Combining long and short read technologies allows accurate detection of single-nucleotide, insertion, and deletion mutations
 	\end{outline}
 	\item Approach
 	\begin{outline}
 		\item Aim 1 - develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome
 			\begin{outline}
+				\item Short Read Error Correction
+				\item Long Read Error Correction
+				\item Error correct ATAC-seq reads with sufficient length
 				\item Align
-				\item Alternative Approeaches
+				\item Call Variants
+				\item Estimate Chromatin Accessibility
+				\item Alternative Approaches
 			\end{outline}
 		\item Aim 2 - test the hypothesis that chromatin accessibility significantly impacts mutation rate
 			\begin{outline}
@@ -81,6 +107,7 @@
 				\item ATAC-seq
 				\item Statistical Analysis of Results
 				\item Alternative Approaches
+				\item Data
 			\end{outline}
 	\end{outline}
 \end{outline}
