@@ -60,54 +60,55 @@
 		\end{outline}
 		\item Measuring chromatin states
 		\begin{outline}
-			\item Sequence Characteristics \parencite{makova_effects_2015}
+			\item Sequence Characteristics and associated mutation types \parencite{makova_effects_2015}
 			\begin{outline}
-				\item GC content
-				\item Sex chromosome vs. autosome
-				\item Exon density
-				\item Recombination rate
-				\item Distance to telomere
-				\item Microsatellite density
-				\item Density of histone modifications
-			\end{outline}
-			\item Mutation Types Associated with Chromatin States
-			\begin{outline}
-				\item foo
+				\item CpG sites - High C to T
+				\item CpG islands - Usually unmethylated, so low mutation rate
+				\item Nucleosome packaging - high rates of deletions and related substitutions, low rates of insertions
+				\item Linker regions - high rates of insertions and related substitutions
+				\item Microsatellite density - often in CG regions, so low mutation rates
+				\item Density of histone modifications - acetylation reduces mutation rate
+				\item DNase 1 hyperactive region - low mutation rate
+				\item In general, open state reduces mutation rate. However, there are some conflicting results.
 			\end{outline}
 			\item Next-Gen Sequencing Assays
 			\begin{outline}
-				\item DNase-seq
-				\item ATAC-seq
+				\item DNase-seq \parencite{boyle_high-resolution_2008} \\
+				Uses DNase 1 to digest unprotected DNA and identify closed chromatin regions.
+				\item ATAC-seq \parencite{buenrostro_transposition_2013} \\
+				Uses hyperactive transposase to attach sequencing adaptors in open chromatin regions.
+				\item ATAC-seq is designed for a small number of cells and allows detection of nucleosome position, so will be preferred.
 			\end{outline}
 		\end{outline}
 	\end{outline}
 	\item Innovation
 	\begin{outline}
 		\item Base-pair resolution of actual chromatin accessibility - not proxy of accessibility
-		\item Sampling strategy allows analysis in healthy somatic cells rather than germline or cancer cells, which could be different. For example, the X chromosome has a low germline mutation rate but a higher mutation rate in cancers. \parencite{makova_effects_2015}
+		\item Sampling strategy allows analysis in healthy somatic cells rather than germline or cancer cells, which could be different. For example, the X chromosome has a relatively low germline mutation rate but a relatively high mutation rate in cancers. \parencite{makova_effects_2015}
 		\item Combining long and short read technologies allows accurate detection of single-nucleotide, insertion, and deletion mutations
+		\item Using chromatin accessibility data from cells of the same tissue within an individual will be more accurate than using matched data from databases.
 	\end{outline}
 	\item Approach
 	\begin{outline}
 		\item Aim 1 - develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome
 			\begin{outline}
-				\item Short Read Error Correction
-				\item Long Read Error Correction
-				\item Error correct ATAC-seq reads with sufficient length
-				\item Align
-				\item Call Variants
-				\item Estimate Chromatin Accessibility
+				\item Align reads - Minimap 2
+				\item Call structural variants - Arrow with only long reads
+				\item Call single nucleotide variants - GATK with only short reads
+				\item Estimate Chromatin Accessibility and nucleosome position - NucleoATAC \parencite{schep_structured_2015} 
 				\item Alternative Approaches
 			\end{outline}
-		\item Aim 2 - test the hypothesis that chromatin accessibility significantly impacts mutation rate
+		\item Aim 2 - test the hypothesis that chromatin accessibility significantly impacts mutation rate in healthy somatic cells
 			\begin{outline}
-				\item Sample Sources
-				\item Tissue collection
+				\item Sample Sources - C57Bl/6J, C57BL/6J-ApcMin/J (colon cancer model), B6;129S4-Tsc2tm1Djk/J (kidney cancer model)
+				\item Tissue collection - lung, colon, kidney from each individual
+				\item Library preperation - 4 from each sample: illumina, nanopore, ATAC, and sanger for validation
 				\item Sequencing
 				\item ATAC-seq
-				\item Statistical Analysis of Results
+				\item Statistical Analysis of Results - regression and Anderson-Darling test for mutational distribution of accessibility
 				\item Alternative Approaches
-				\item Data
+				\item Data - Somatic mutation calls, chromatin accessibility measurements, and nucleosome position
+				\item Validation - Sanger sequencing, HMM prediction of chromatin state
 			\end{outline}
 	\end{outline}
 \end{outline}
