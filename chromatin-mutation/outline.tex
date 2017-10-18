@@ -101,8 +101,19 @@
 		\item Aim 2 - test the hypothesis that chromatin accessibility significantly impacts mutation rate in healthy somatic cells
 			\begin{outline}
 				\item Sample Sources - C57Bl/6J, C57BL/6J-ApcMin/J (colon cancer model), B6;129S4-Tsc2tm1Djk/J (kidney cancer model)
+				\begin{outline}
+					\item ALTERNATIVE: other mismatch repair deficient strains \parencite{wei_mouse_2002}
+					\item ALTERNATIVE: colon is heterogeneous, so may be challenging; prostate could work, but potentially low cell count \parencite{behjati_genome_2014}
+				\end{outline}
 				\item Tissue collection - lung, colon, kidney from each individual
+				\begin{outline}
+					\item kidney and ear have had successfully detected mutants \parencite{turker_autosomal_2003}
+					\item ALTERNATIVE: create in-vitro cell line; wld work, but potentially modified chromatin state \parencite{behjati_genome_2014}
+				\end{outline}
 				\item Library preperation - 4 from each sample: illumina, nanopore, ATAC, and sanger for validation
+				\begin{outline}
+					\item be sure to use a PCR-free method
+				\end{outline}
 				\item Sequencing
 				\item ATAC-seq
 				\item Statistical Analysis of Results - regression and Anderson-Darling test for mutational distribution of accessibility
