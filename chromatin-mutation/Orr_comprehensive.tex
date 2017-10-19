@@ -24,7 +24,7 @@
 % Innovation : Recommended Length: The recommended length of the innovation section is 0.25-0.5
 % Approach : Recommended Length: The maximum recommended length of the approach section is 4.5-5 pages. 
 
-\subsection{Significance}
+\section{Significance}
 
 % why study somatic mutation?
 Somatic mutations are mutations that occur in somatic cells, and as such are not passed to offspring.
@@ -103,7 +103,7 @@ Additionally, this method may be a useful alternative or supplement to current m
 % Explain how the proposed project will improve scientific knowledge, technical capability, and/or clinical practice in one or more broad fields.
 % Describe how the concepts, methods, technologies, treatments, services, or preventative interventions that drive this field will be changed if the proposed aims are achieved.
 
-\subsection{Innovation}
+\section{Innovation}
 % Explain how the application challenges and seeks to shift current research or clinical practice paradigms.
 % Describe any novel theoretical concepts, approaches or methodologies, instrumentation or interventions to be developed or used, and any advantage over existing methodologies, instrumentation, or interventions.
 % Explain any refinements, improvements, or new applications of theoretical concepts, approaches or methodologies, instrumentation, or interventions.
@@ -122,14 +122,33 @@ A reliable method of detecting somatic mutations in healthy cells and non-tumor 
 % - design allows detection of irregularities due to increased cancer risk
 % - show how a proactive approach to predicting cancer vulnerability could be used for screening
 
-\subsection{Approach}
-\subsubsection{Aim 1}
-The low frequency of mutations in somatic cells can make them difficult to detect, so great care must be taken when using software tools for this purpose.
+\section{Approach}
+\subsection{Aim 1}
+\subsubsection{Pipeline Inputs}
+The low frequency of mutations in somatic cells can make them difficult to detect.
+At the same time, errors introduced while sequencing occur at far greater frequency.
+Great care must be taken when using software tools for detecting somatic mutations, as sequencing errors can cause high false positive rates.
+
 A significant number of mutations are expected to occur in microsatellites.
 These regions are some of the most variable in the genome, and have been demonstrated to mutate frequently even in somatic cells.
+Short sequencing reads are often difficult to map to these repeat-rich regions, so a bioinformatic method to detect mutations in these regions should incorporate long sequencing reads. At the same time, long sequencing reads are particularly error prone, causing them to make more errors when reporting the nucleotide within the sequencing read. Thus, the pipeline should be able to accomodate short sequencing reads as a method for accurately detecting point mutations and long sequencing reads for accurately detecting insertions and deletions.
+
+For the long read platform, Oxford Nanopore is preferred because the electrical signal used to sequence the input DNA also contains information that can be used to detect methylated cytosines without additional library preparation. This information will be used to validate nucleosome occupancy information. That this information can be extracted from the same sequencing run is significant, as the the amount of sampled tissue will be too small to perform a separate bisulfite sequencing reaction.
+
+Oxford Nanopore sequencing can be done in one of two ways: 1D sequencing and 2D sequencing.
+In 2D Oxford Nanopore sequencing, each complementary strand of DNA is connected by a hairpin loop. As the DNA is pulled through the pore, the hairpin loop is computationally recognized by the sequencer. It then knows that the sequence following is from the complementary strand of DNA, and uses that information to correct potential errors before outputting the bases contained in the read.
+Therefore, 2D Oxford Nanopore reads should be used because they contain fewer errors than 1D reads.
+
+Thus, the pipeline will accept as inputs: 1) a set of short Illumina sequencing reads, 2) a set of Oxford Nanopore 2D reads, and 3) the reference of the genome to which the reads will be aligned. The Illumina reads should be in FASTQ format, the Oxford Nanopore reads should be in FAST5 format, and the reference genome should be in FASTA format.
+
+\subsubsection{Read Correction}
+While 2D Nanopore data contains fewer errors than 1D data, it still far more error prone than short read data.
+And while short reads have relatively few errors, they do contain errors that can cause ambiguity during variant detection.
+To minimize the number of false positive mutation calls, 
 
 
-\subsubsection{Aim 2}
+
+\subsection{Aim 2}
 % 2. Approach
 % Describe the overall strategy, methodology, and analyses to be used to accomplish the specific aims of the project. Unless addressed separately in the Resource Sharing Plan attachment, include how the data will be collected, analyzed, and interpreted as well as any resource sharing plans as appropriate.
 % Discuss potential problems, alternative strategies, and benchmarks for success anticipated to achieve the aims.
@@ -138,7 +157,9 @@ These regions are some of the most variable in the genome, and have been demonst
 
 % If you have multiple Specific Aims, you may address Significance, Innovation, and Approach either for each Specific Aim individually or for all of the Specific Aims collectively. As applicable, also include the following information as part of the Research Strategy, keeping within the three sections (Significance, Innovation, and Approach) listed above.
 
+\subsubsection{Power Analysis}
 
+The distribution of accessibility values for each mutation is not known. However, assuming the distribution is normal can assist in approximating an appropriate sample size for the experiment. Additionally, assume the distribution has a standard deviation 0.25, so that most of the data lies within a range of 1. Though base-pair level accuracies of 99.78\% have been achieved using mixed Illumina and Nanopore reads, assume only 50\% of all mutations are detected, and these are evenly distributed across all sample sources and relative chromatin accessibility. Literature estimates \parencite{behjati_genome_2014} of similar somatic mouse samples suggest greater than 160 base substitutions per sample, resulting in 80 detectable substitutions. Microsatellite insertions and deletions should occur at equal or greater frequencies, but to be conservative those will not be considered. To detect a 5\% difference in mean chromatin accessibility with a type II error of 5\% requires a total of 1300 mutations. Under these assumptions, the required number of mice to sample is 16.25. To ensure a sufficient number of somatic mutations are acquired, samples will be taken from 30 mice.
 
 
 \section{References} %no limit
