@@ -17,8 +17,6 @@
 
 \clearpage
 
-\section{Research Strategy} %6 pages
-
 % 6 pages
 % Significance : Recommended Length: Approximately 0.5-1 pages 
 % Innovation : Recommended Length: The recommended length of the innovation section is 0.25-0.5
@@ -157,15 +155,21 @@ The corrected short reads can be used to detect and correct errors in the long r
 After correction, the sequencing reads should more accurately reflect the DNA of the sequenced sample. However, they still may contain some errors. Additionally, as some of samples planned to be sequenced in this experiment are tumors and may be significantly diverged from the reference genome, a read aligner capable of aligning noisy, divergent reads must be used.
 
 Minimap2 is a program designed for this purpose. Additionally, Minimap2 supports alignment with both Illumina and Nanopore reads. As such, it will be used to align the reads to the reference genome.
-Minimap2 has suggested sets of parameters for different types of data. For mapping the Illumina reads, \textit{-x sr} will be used to indicate that short reads will be mapped. For mapping long reads, \textit{-x map-ont} will be used to indicate that long reads from an Oxford Nanopore will be mapped. Minimap does not map both reads at the same time, so the operations will be done independently. For both executions of the program, the \textit{-a} option will be specified to signify that the output should be in SAM format. Additionally, the \texit{--cs} option will be used to add a CIGAR string tag to the SAM output. This option is necessary to properly encode CIGAR information for very long reads due to a defect in the BAM specification.
+Minimap2 has suggested sets of parameters for different types of data. For mapping the Illumina reads, \textit{-x sr} will be used to indicate that short reads will be mapped. For mapping long reads, \textit{-x map-ont} will be used to indicate that long reads from an Oxford Nanopore will be mapped. Minimap does not map both reads at the same time, so the operations will be done independently. For both executions of the program, the \textit{-a} option will be specified to signify that the output should be in SAM format. Additionally, the \textit{--cs} option will be used to add a CIGAR string tag to the SAM output. This option is necessary to properly encode CIGAR information for very long reads due to a defect in the BAM specification. After this step, two BAM files will be produced; one with aligned Nanopore reads and one with aligned Illumina reads.
 
 %nanopolish
+Due to the length of the Nanopore reads, they are well suited for detecting structural variation. To do so, the Nanopolish software package will be used. Nanopolish uses the raw electrical signal data produced by the nanopore during sequencing. Thus, prior to calling variants, the \textit{eventalign} command of Nanopolish must be run to produce an alignment of the electrical signals to each of the reads. Then, the \textit{variants} command of Nanopolish can be used. Nanopolish was chosen to call variants as it is the current standard in the field for variant calling using Oxford Nanopore data. An alternative method, Poreseq, has recently been introduced \parencite{szalay_novo_2015}. While the performance of the two softwares' variant calling program have not been compared, the consensus generating functions of both packages have (see discussion of \cite{szalay_novo_2015}), and Nanopolish was found to be slightly more accurate. At the conclusion of this step, a VCF containing structural and single nucleotide variants will be produced.
 
 %mutect2
+While long reads are helpful for finding structural variants, they are deficient in accurately identifying single nucleotide variants. As such, these variants will be detected using the short Illumina reads. Since the sequenced samples are solid tissue and may be highly heterogeneous cancer tumors, the Mutect2 software will be used to call variants. 
 
 %combine vcfs
 
 %chromatin accessibility with NucleoATAC
+
+%validation
+
+%alternative approaches
 
 \subsection{Aim 2}
 % 2. Approach
