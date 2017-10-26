@@ -96,13 +96,13 @@
 				\item Correct Nanopore reads - Nanocorr (99.88\% accuracy) \parencite{goodwin_oxford_2015}
 				\item Align reads - Minimap 2
 				\item Call structural variants - Nanopolish
-				\item Call single nucleotide variants - Mutect2 with only short reads
+				\item Call single nucleotide variants - Mutect2 with only short reads - Mark Duplicates with Picard -> Base Recalibration -> Mutect2 with matched Normal sequence
 				\item Estimate Chromatin Accessibility and nucleosome position - NucleoATAC \parencite{schep_structured_2015} 
 				\item Alternative Approaches
 			\end{outline}
 		\item Aim 2 - test the hypothesis that chromatin accessibility significantly impacts mutation rate in healthy somatic cells
 			\begin{outline}
-				\item Sample Sources - C57Bl/6J, C57BL/6J-ApcMin/J (colon cancer model), B6;129S4-Tsc2tm1Djk/J (kidney cancer model)
+				\item Sample Sources - C57Bl/6J, C57BL/6J-ApcMin/J (colon cancer model)
 				\begin{outline}
 					\item ALTERNATIVE: other mismatch repair deficient strains \parencite{wei_mouse_2002}
 					\item ALTERNATIVE: colon is heterogeneous, so may be challenging; prostate could work, but potentially low cell count \parencite{behjati_genome_2014}
