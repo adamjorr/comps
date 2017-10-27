@@ -28,61 +28,76 @@
 Somatic mutations are mutations that occur in somatic cells, and as such are not passed to offspring.
 These mutations arise due to errors in DNA replication preceding cell division.
 While the DNA replication and error repair machinery is highly accurate, mutations occur at high enough frequencies to be significant.
-Current assumptions of error rate and genome size imply that on average each cell division results in the accumulation of one novel mutation in the daughter cells.
+There is significant disagreement on the role somatic mutations play in carcinogenesis \parencite{baker_cancer_2015}.
+However, it is clear that cancer tumors exhibit genotypes distinct from their host and one of the canonical hallmarks of cancer is genome instability \parencite{hanahan_hallmarks_2000, hanahan_hallmarks_2011}.
 
-These mutations are central to the somatic mutation theory of cancer.
-This theory posits that cancers arise in multicellular organisms when somatic cells of that organism accumulate a sufficient number of mutations in oncogenes or tumor suppressor genes induces tumorigenesis.
-Important mutations in oncogenes cause them to be over activated, promoting unnecessary cell proliferation.
-In contrast, relevant mutations in tumor suppressor genes cause them to lose functionality, inhibiting their ability to limit cell proliferation.
-Once a sufficient number of these mutations accumulate, the cell divides rapidly and accumulates even more somatic mutations, severely destabilizing the genome.
-Thus, understanding how somatic mutations accumulate in healthy cells is vital to understanding the onset and progression of cancer. 
+One of the most popular theory of cancer is the Somatic Mutation Theory, which suggests that somatic mutations slowly accumulate as cells divide, until a sufficient number are gained that significantly disrupt cell cycle control. While there is evidence that somatic tissue division rates explains a large proportion of variation in cancer incidence \parencite{tomasetti_variation_2015}, implying most cancers are due to stochastic mutations that occur during replication and are not related to exposure. However, this result is strongly disputed \parencite{rozhok_critical_2015, wang_implications_2015}. In particular, critics claim that the theory doesn't adequately explain how a sufficient number of somatic mutations accumulate \parencite{baker_cancer_2015}. 
+Evidence of how somatic mutation rates vary in different tissues and in different locations across the genome could help resolve this dispute.
+However, our understanding of how the rate of somatic mutations and how that rate changes in different cell types is limited \parencite{stratton_cancer_2009}. 
+
+One explanation that has been offered to explain local variation in mutation rate across the genome is epigenetic state. Analysis of neutrally-evolving regions suggests that several indicators of epigenetic state are associated with variation in local mutation rate in primate evolution \parencite{makova_effects_2015}.
+A screen of histone modifications found that histone modification H3K9me3 can account for nearly 40\% of variation in regional point mutation rates in cancer cells \parencite{schuster-bockler_chromatin_2012}.
+In another study using Hi-C analysis of high-level chromatin states has found that high-level chromatin organization contributes to simultaneous point mutations in protein-coding genes \parencite{shi_chromatin_2016}.
+Recently, cytosine to thymine mutations caused by deamination of methylated CpG sites has been found to be associated common driver mutations in colorectal and ovarian cancers \parencite{gold_somatic_2017}.
+Thus, it is clear that chromatin states have an impact on local variation in mutation rate; however, more evidence is required to evaluate the strength of this relationship, how it changes in cancer, and how it contributes to differences in mutation and cancer incidence rates in different tissues.
+
+
+
+% Despite the important role that somatic mutations play in the onset and progression of cancer, 
+% Current assumptions of error rate and genome size imply that on average each cell division results in the accumulation of one novel mutation in the daughter cells.
+% These mutations are central to the somatic mutation theory of cancer.
+% This theory posits that cancers arise in multicellular organisms when somatic cells of that organism accumulate a sufficient number of mutations in oncogenes or tumor suppressor genes induces tumorigenesis.
+% Important mutations in oncogenes cause them to be over activated, promoting unnecessary cell proliferation.
+% In contrast, relevant mutations in tumor suppressor genes cause them to lose functionality, inhibiting their ability to limit cell proliferation.
+% Once a sufficient number of these mutations accumulate, the cell divides rapidly and accumulates even more somatic mutations, severely destabilizing the genome.
+% Thus, understanding how somatic mutations accumulate in healthy cells is vital to understanding the onset and progression of cancer. 
 
 %why study chromatin accessibility?
-A similarly important factor required for the onset of cancer is the deregulation of chromatin.
-The chromatin state in a region of the genome is determined by the organization of the nucleosomes in the region.
-These nucleosomes are composed of histones, which bind and organize a segment of DNA.
-While the function of higher orders of organization is not well understood, the function and impact of different chromatin states is clear.
-Chromatin takes two important possible states: heterochromatin, in which the DNA is tightly packaged; and euchromatin, in which the DNA is loosely packaged.
-In the heterochromatin state, translation is repressed as the DNA is inaccessible to translation proteins.
-In the euchromatin state, translation can occur as the DNA is available for translation complexes to bind.
+% A similarly important factor required for the onset of cancer is the deregulation of chromatin.
+% The chromatin state in a region of the genome is determined by the organization of the nucleosomes in the region.
+% These nucleosomes are composed of histones, which bind and organize a segment of DNA.
+% While the function of higher orders of organization is not well understood, the function and impact of different chromatin states is clear.
+% Chromatin takes two important possible states: heterochromatin, in which the DNA is tightly packaged; and euchromatin, in which the DNA is loosely packaged.
+% In the heterochromatin state, translation is repressed as the DNA is inaccessible to translation proteins.
+% In the euchromatin state, translation can occur as the DNA is available for translation complexes to bind.
 
-As the chromatin state significantly impacts translational ability, and different tissues must express different genes to maintain their identity, different tissues have different distributions of chromatin states.
-The process of switching between these states is known as chromatin remodeling.
-As cancers require normally silenced genes to be expressed, misregulated chromatin remodeling is important for tumorigenesis.
-In fact, many genes implicated as oncogenes or tumor suppressor genes have functions important for chromatin remodeling.
-As such, understanding how these epigenetic changes cause disease is vital to understanding and preventing cancer.
+% As the chromatin state significantly impacts translational ability, and different tissues must express different genes to maintain their identity, different tissues have different distributions of chromatin states.
+% The process of switching between these states is known as chromatin remodeling.
+% As cancers require normally silenced genes to be expressed, misregulated chromatin remodeling is important for tumorigenesis.
+% In fact, many genes implicated as oncogenes or tumor suppressor genes have functions important for chromatin remodeling.
+% As such, understanding how these epigenetic changes cause disease is vital to understanding and preventing cancer.
 
 
 % why study the interface of somatic mutation and chromatin accessibility?
-Thus, it is apparent that a comprehensive understanding of cancer onset requires integrating both somatic mutation and epigenetic misregulation.
-The somatic mutation theory of cancer can explain both components, as mutations in chromatin remodeling proteins can cause the large-scale changes in expression required for tumors to form and thrive.
-Some critics claim that the theory inadequately explains how the requisite mutations are obtained.
-As somatic mutations occur at very low frequency, the probability of accumulating the number of required mutations in the correct sites and within the same cell is low.
-A potential resolution to this inconsistency is the observation that mutation rates are not evenly distributed across the genome.
-That is, mutation rates could be high enough in regions that contain oncogenes and tumor suppressor genes that mutating a sufficient number of them can occur with probabilities consistent with rates of cancer incidence.
+% Thus, it is apparent that a comprehensive understanding of cancer onset requires integrating both somatic mutation and epigenetic misregulation.
+% The somatic mutation theory of cancer can explain both components, as mutations in chromatin remodeling proteins can cause the large-scale changes in expression required for tumors to form and thrive.
+% Some critics claim that the theory inadequately explains how the requisite mutations are obtained.
+% As somatic mutations occur at very low frequency, the probability of accumulating the number of required mutations in the correct sites and within the same cell is low.
+% A potential resolution to this inconsistency is the observation that mutation rates are not evenly distributed across the genome.
+% That is, mutation rates could be high enough in regions that contain oncogenes and tumor suppressor genes that mutating a sufficient number of them can occur with probabilities consistent with rates of cancer incidence.
 
-Recently, many groups have reported a strong association between regional variation in somatic mutation rates in tumors and chromatin states in that region.
-This pattern has also been seen in germline mutations.
-Thus, it is highly likely that chromatin states impact local mutation rates in healthy somatic tissues as well.
-Because chromatin remodeling is an important aspect of cell differentiation, different tissues have different patterns of chromatin states.
-This implies that different tissues have different distributions of mutation rates.
+% Recently, many groups have reported a strong association between regional variation in somatic mutation rates in tumors and chromatin states in that region.
+% This pattern has also been seen in germline mutations.
+% Thus, it is highly likely that chromatin states impact local mutation rates in healthy somatic tissues as well.
+% Because chromatin remodeling is an important aspect of cell differentiation, different tissues have different patterns of chromatin states.
+% This implies that different tissues have different distributions of mutation rates.
 
-One observation that indicates that this difference may be significant for studying cancer is that different tissues have different rates of cancer incidence.
-There is debate about how much of this difference can be attributed to difference in cell division rates between different tissues.
-However, differences in chromatin states of oncogenes and tumor suppressor genes in healthy somatic tissue may play an important role.
+% One observation that indicates that this difference may be significant for studying cancer is that different tissues have different rates of cancer incidence.
+% There is debate about how much of this difference can be attributed to difference in cell division rates between different tissues.
+% However, differences in chromatin states of oncogenes and tumor suppressor genes in healthy somatic tissue may play an important role.
 
 % Aim 1 of this project is to develop a novel bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
 
 % why do we need a method to jointly detect somatic mutations and chromatin accessibility?
-Despite the central role of somatic mutations in cancer development, they remain difficult to study.
-However, if a relationship between chromatin accessibility and mutation rate exists, this can be explicitly modeled to improve detection of somatic mutations.
-At the same time, sequencing-based assays of chromatin accessibility hold underlying genotype information.
-Thus, considering both types of data at the same time and integrating information from both data sources into a model will increase the ability of the researcher to sensitively and accurately detect somatic mutations.
+% Despite the central role of somatic mutations in cancer development, they remain difficult to study.
+% However, if a relationship between chromatin accessibility and mutation rate exists, this can be explicitly modeled to improve detection of somatic mutations.
+% At the same time, sequencing-based assays of chromatin accessibility hold underlying genotype information.
+% Thus, considering both types of data at the same time and integrating information from both data sources into a model will increase the ability of the researcher to sensitively and accurately detect somatic mutations.
 
-With this ability, researchers will be able to study somatic mutation in healthy tissue much more easily than previously.
-Because the sequencing reads provided by the accessibility assay can be used to estimate genotypes in low-depth regions, researchers can achieve higher-quality genotypes with less sequencing depth.
-This could result in lower sequencing costs, which can be an issue when studying somatic mutations due to the high sequencing depth required with traditional methods.
-Additionally, this method may be a useful alternative or supplement to current methods used to detect somatic mutations within tumors.
+% With this ability, researchers will be able to study somatic mutation in healthy tissue much more easily than previously.
+% Because the sequencing reads provided by the accessibility assay can be used to estimate genotypes in low-depth regions, researchers can achieve higher-quality genotypes with less sequencing depth.
+% This could result in lower sequencing costs, which can be an issue when studying somatic mutations due to the high sequencing depth required with traditional methods.
+% Additionally, this method may be a useful alternative or supplement to current methods used to detect somatic mutations within tumors.
 
 % how will this method change the field if it is achieved?
 % reduce sequencing costs - less covg necessary initially, doesn't throw away  information from ATAC-seq
@@ -107,8 +122,7 @@ Additionally, this method may be a useful alternative or supplement to current m
 % Explain any refinements, improvements, or new applications of theoretical concepts, approaches or methodologies, instrumentation, or interventions.
 
 While there has been a large body of work on the generation of somatic mutations in the presence of mutagens, much less is known about the endogenous process that generates somatic mutations--that is, the process that generates somatic mutations even in cells that are never exposed to mutagens or unusual stress.
-% Despite the critical role somatic mutations play in tumorigenesis, these mutations are usually studied only in tumors, as there are a sufficient number of mutations that a significant number can be detected at modest sequencing depth.
-% However, most of these mutations did not cause the tumor, and occur only after the tumor has formed.
+
 This impedes researchers' ability to detect significant departures from healthy levels and patterns of somatic mutation; a significant amount of energy is expended in differentiating non-pathogenic "passenger" mutations from the "driver" mutations that actually contribute to tumor formation.
 This knowledge gap is largely due to the technical difficulty of detecting somatic mutations in healthy tissues.
 In any sample of healthy tissue, the number of somatic mutations within the sample is expected to be orders of magnitude smaller than the number of sequencing errors.
@@ -239,35 +253,30 @@ The intestine will be removed and flushed with PBS. It will then be cut open wit
 
 Each of the intestinal samples will be split into four portions for sequencing. One portion for each sequencing reaction to be performed: whole genome Illumina sequencing, whole genome Nanopore sequencing, ATAC-seq. The additional portion will be stored and later sequenced by Sanger sequencing to validate mutations detected by the computational pipeline discussed above. The skin samples will be split into three portions for sequencing; they will be treated identically to the intestinal samples, but an ATAC-seq procedure will not be performed.
 
-%illumina prep goes here
+%illumina prep
+DNA extraction for Illumina sequencing will be done by lysing the cells with detergent and proteinase K followed by DNA extraction with chloroform followed by precipitation with ethanol. RNA will then be removed with treatment by RNAse. Once the DNA is extracted, sample preparation can proceed using the Illumina paired-end, PCR-free library preparation kit.
 
-
-
-%nanopore prep goes here
-% bead beating to lyse cells
-% oxford nanopore library kit
-In nanopore sequencing, care must be taken when extracting DNA so long fragments in the sample are not sheared. As such, cells will be lysed by pulverization with plastic beads. 
-
-
+%nanopore prep 
+In nanopore sequencing, care must be taken when extracting DNA so long fragments in the sample are not sheared. As such, cells will be lysed by pulverization with glass beads. DNA can then be purified by the same method used for preparation of the Illumina libraries. After the DNA is purified from the sample, the library can be created using the Oxford Nanopore Technologies PCR-free 2D library preparation kit. 
 
 %atac prep goes here \parencite{buenrostro_atac-seq:_2015}
-
-
-
-
-%sanger prep goes here
-
+ATAC-seq DNA extraction and library preparation will be performed by a protocol adapted from \cite{buenrostro_atac-seq:_2015}.
+Care must be taken during extraction of DNA for ATAC-seq, as nucleosomes bound to DNA must be extracted intact for the assay to work properly. For this purpose, the cells are lysed using the nonionic, non-denaturing detergent IGEPAL CA-630. The cells are then pelleted in a centrifuge and resuspended in Illumina transposase reaction buffer with the Illumina Nextera transposase. After incubation, the DNA will be purified with a DNA purification kit. The extracted DNA will then be amplified by PCR; during this process, sequencing adapters and barcodes are added. To reduce the uneven amplification of DNA caused by low reagent concentrations toward the end of the reaction, a small portion of the DNA is subjected to a qPCR reaction to determine the appropriate number of cycles for the PCR.
 
 %alternatives
-To sensitively detect mutations as accurately as possible, PCR-free sequencing library preparations should be used. However, the amount of source cells may be too low to get sufficient sequencing depth for mutation detection. After sequencing, the average coverage for the Illumina or Nanopore alignments will be inspected. If this coverage is consistently low, PCR will be used prior to library preparation. This will increase the false positive rate and therefore increase the amount of effort needed to validate mutations using Sanger sequencing, but will provide enough sequencing data to perform the analysis.
+To sensitively detect mutations as accurately as possible, PCR-free sequencing library preparations should be used. However, the amount of source cells may be too low to get sufficient sequencing depth for mutation detection. After sequencing, the average coverage for the Illumina or Nanopore alignments will be inspected. If this coverage is consistently low, PCR will be used during library preparation. This will increase the false positive rate and therefore increase the amount of effort needed to validate mutations using Sanger sequencing, but will provide enough sequencing data to perform the analysis.
 
 
 \subsection{Statistical Analysis}
 %look at mutation rate in and out of open regions w/ poisson rate test
+After DNA extraction and sequencing, the data will be analyzed by the pipeline created for Aim 1. The output of the pipeline containing the detected mutations and whether they fall within open or closed chromatin regions will be analyzed using the R statistical software package.
+The number of mutations falling in or out of open chromatin regions is likely Poisson distributed. A Poisson exact test can then be performed to test the null hypothesis that the rate of mutation is equal in the two types of chromatin.
 
-%look at enrichment vs number of mutations, regress 
+The extent of this relationship can be further investigated, as the accessibility of the chromatin regions takes a numeric value. For each site, the normalized ATAC-seq coverage at that site and whether or not that contained a mutation can be regressed using a logistic regression. This type of regression is used when the dependent variable is binary; here, whether a mutation occured or not. This will test whether increasing accessibility is associated with an increased probability of experiencing a mutation. Additionally, this will estimate parameters that can be compared between the normal and cancer-burdened samples to determine how this relationship changes in diseased individuals.
 
-%look at distrobution of enrichment at mutated sites, AD test
+Another method of comparing how the relationship between chromatin accessibility and mutation differs in tumors is by an analysis of the distribution of chromatin accessibility at mutated sites in both groups. This distribution can be calculated for each group then compared with a 2-sample Anderson Darling test. This tests the null hypothesis that the two samples were taken from the same distribution. It is non-parametric and does not assume an underlying distribution. This test was chosen over alternative tests because it does not penalize differences in the tails as heavily as other distributions. Since any site not determined to be significantly enriched will have an accessibility of 0, there may be an abundance of data on the left tail of the distribution. If this bias is found to be too extreme, the analysis can be done using only sites that are found to be in open regions.
+
+At the conclusion of these analyses, the extent of the relationship between chromatin accessibility and mutation rate---and the way this relationship changes in cancer---will be elucidated.
 
 \clearpage
 
