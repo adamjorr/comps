@@ -219,7 +219,7 @@ By Lehr's equation, to distinguish between two rates $\lambda_1$ and $\lambda_2$
 Though base-pair level accuracies of 99.78\% have been achieved using mixed Illumina and Nanopore reads, assume only 50\% of all mutations are detected, and these are evenly distributed across all sample sources and relative chromatin accessibility. Literature estimates \parencite{behjati_genome_2014} of similar somatic mouse samples suggest greater than 160 base substitutions per sample, resulting in 80 detectable substitutions. Microsatellite insertions and deletions should occur at equal or greater frequencies, but to be conservative those will not be considered. Under these assumptions, the required number of mice to sample is 16.4. To ensure a sufficient number of somatic mutations are acquired, samples will be taken from 50 mice of each strain.
 
 
-\subsection{Tissue Collection}
+\subsection{Sample Preparation}
 
 Sample heterogeneity is a significant hurdle for accurately detecting mutations and getting reliable ATAC-seq data. When a sample is excessively heterogeneous, mutations in the sample are of too low frequency to detect. During ATAC-seq, a heterogeneous sample will have a mixture of nucleosome-free regions, dampening signals that can be detected in more homogenous samples. At the same time, single-cell sequencing and single-cell ATAC-seq require sorting methods that may damage the cell, and interpretation of results is made difficult by mutations introduced and propagated during library preparation. When mutations or ATAC signals are accurately detected, they may be unique to the isolated cell and not representative of the tissue bulk.
 
@@ -227,14 +227,40 @@ To avoid these issues, intestine epithelial cells will be extracted from the mic
 
 %isolating skin keratinocytes \parencite{jensen_isolation_2013}
 To isolate skin cells, a protocol adapted from \cite{jensen_isolation_2013} will be used.
-In a sterile hood, the euthanized mice will be submerged in Betadine to disinfect the skin. The mice will then be washed in sterile water. A section of skin will then be excised and soaked in phosphate buffered saline to aid in the removal of fat and muscle with a scalpel. The skin will then be treated with trypsin to reduce cell adhesion. This will allow the epidermis to be separated from the dermis with a scalpel. The epidermal sections will then be 
-added to fibroblast growth medium and gently stirred. The cells will then be passed through a 70\mu m filter and centrifuged. The pellet of cells will then be washed with phosphate buffered saline to remove any debris, then resuspended in fibroblast growth medium.
+In a sterile hood, the euthanized mice will be submerged in Betadine to disinfect the skin. The mice will then be washed in sterile water. A section of skin will then be excised and soaked in phosphate buffered saline (PBS) to aid in the removal of fat and muscle with a scalpel. The skin will then be treated with trypsin to reduce cell adhesion. This will allow the epidermis to be separated from the dermis with a scalpel. The epidermal sections will then be 
+added to fibroblast growth medium and gently stirred. The cells will then be passed through a 70\mu m filter and centrifuged. The pellet of cells will then be washed with PBS to remove any debris, then resuspended in fibroblast growth medium.
 
 %isolating intestinal cells \parencite{orourke_isolation_2016}
 To isolate the intestinal cells, a protocol adapted from \cite{orourke_isolation_2016} will be used.
+The intestine will be removed and flushed with PBS. It will then be cut open with scissors and washed again with PBS to ensure there is no remaining debris. The intestine will then be minced and incubated with EDTA to prepare for collagenase digestion. The EDTA will then be removed by aspiration and the cells washed with PBS. The cells will then be incubated with basal medium containing collagenase to dissociate the cells. PBS will then be added, the tube mixed, and the PBS layer transferred to a separate tube containing basal medium. The cells will then be filtered through a 70 \mu m filter into a tube coated with bovine serum albumin to prevent adhesion to the side of the tube. This will then be centrifuged, the supernatant discarded, and the cells resuspended in basal medium.
+
+\subsection{Sample Sequencing}
+
+Each of the intestinal samples will be split into four portions for sequencing. One portion for each sequencing reaction to be performed: whole genome Illumina sequencing, whole genome Nanopore sequencing, ATAC-seq. The additional portion will be stored and later sequenced by Sanger sequencing to validate mutations detected by the computational pipeline discussed above. The skin samples will be split into three portions for sequencing; they will be treated identically to the intestinal samples, but an ATAC-seq procedure will not be performed.
+
+%illumina prep goes here
 
 
-\subsection{Library Preparation}
+
+%nanopore prep goes here
+% bead beating to lyse cells
+% oxford nanopore library kit
+In nanopore sequencing, care must be taken when extracting DNA so long fragments in the sample are not sheared. As such, 
+
+
+
+%atac prep goes here \parencite{buenrostro_atac-seq:_2015}
+
+
+
+
+%sanger prep goes here
+
+
+%alternatives
+To sensitively detect mutations as accurately as possible, PCR-free sequencing library preparations should be used. However, the amount of source cells may be too low to get sufficient sequencing depth for mutation detection. After sequencing, the average coverage for the Illumina or Nanopore alignments will be inspected. If this coverage is consistently low, PCR will be used prior to library preparation. This will increase the false positive rate and therefore increase the amount of effort needed to validate mutations using Sanger sequencing, but will provide enough sequencing data to perform the analysis.
+
+
 
 \subsection{Statistical Analysis}
 
