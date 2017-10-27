@@ -197,7 +197,8 @@ Finally, the mutations detected earlier in the pipeline must be compared with th
 \subsection{Pipeline Validation}
 %TODO: mix two cell lines. run pipeline using sequence frm 1 as matched normal. see if differences in other cell line can be detected. for second
 
-%try to find a line already analyzed by ATAC-seq. see how sig. peaks compare to those calculated w/ pipeline.
+To measure the accuracy of the pipeline in genotyping heterogeneous mixtures and observe the effect of performing ATAC-seq on mixtures of cancerous and normal tissue, an in-vitro sequencing experiment will be performed. A normal mouse intestinal epithelium cell line will be obtained, along with a mouse intestinal cancer cell line. A DNA sample from each of these lines will be independently sequenced with both Illumina and Nanopore sequencing to obtain the genotypes of both lines, and ATAC-seq will be performed on both samples to detect open and closed chromatin regions. After determining the genotypes and ATAC-seq profiles of the pure cell lines, cells from both lines will be mixed and the protocol repeated. The pipeline will then be run using this data, treating the purified normal cell line as a control. To evaluate the performance of the variant detection part of the pipeline, output variants can be compared to the genotype of the cancer cell line. Variants found that are not present in the cell line are likely false positives, which can be confirmed by Sanger sequencing. To evaluate the performance of the ATAC-seq enrichment detection, the enriched regions detected by the pipeline can be compared to those found in the pure cell lines.
+This process will be replicated to ensure pipeline performance is consistent. 
 
 %alternative approaches
 % only use short indels and snps detected by both nanopolish and mutect
@@ -245,7 +246,7 @@ Each of the intestinal samples will be split into four portions for sequencing. 
 %nanopore prep goes here
 % bead beating to lyse cells
 % oxford nanopore library kit
-In nanopore sequencing, care must be taken when extracting DNA so long fragments in the sample are not sheared. As such, 
+In nanopore sequencing, care must be taken when extracting DNA so long fragments in the sample are not sheared. As such, cells will be lysed by pulverization with plastic beads. 
 
 
 
@@ -261,8 +262,12 @@ In nanopore sequencing, care must be taken when extracting DNA so long fragments
 To sensitively detect mutations as accurately as possible, PCR-free sequencing library preparations should be used. However, the amount of source cells may be too low to get sufficient sequencing depth for mutation detection. After sequencing, the average coverage for the Illumina or Nanopore alignments will be inspected. If this coverage is consistently low, PCR will be used prior to library preparation. This will increase the false positive rate and therefore increase the amount of effort needed to validate mutations using Sanger sequencing, but will provide enough sequencing data to perform the analysis.
 
 
-
 \subsection{Statistical Analysis}
+%look at mutation rate in and out of open regions w/ poisson rate test
+
+%look at enrichment vs number of mutations, regress 
+
+%look at distrobution of enrichment at mutated sites, AD test
 
 \clearpage
 
