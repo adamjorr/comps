@@ -6,12 +6,12 @@
 % create a novel design, solve a specific problem, challenge an existing paradigm or clinical practice,
 % address a critical barrier to progress in the field, or develop new technology)
 
-Somatic mutations occur infrequently, estimated to occur only once per genome every cell division.
+Somatic mutations occur infrequently, estimated to occur on average once per genome per cell division.
 The somatic mutation theory of cancer suggests that somatic cells accumulate mutations until a sufficient number of mutations in oncogenes or tumor suppressor genes cause the mutated cell to become cancerous.
 Thus, cancer incidence can be impacted by increasing the rate of mutation \textit{or} increasing the probability of mutation in an oncogene or tumor suppressor gene.
 
 %talk about clues in chromatin association and differences in tissue chromatin str.
-Recent work has revealed that the locations of mutations in cancer tumors are associated with regions of open chromatin.
+Recent work has revealed that the genomic distribution of mutations in cancer tumors are associated with chromatin structure.
 % To fit in the nucleus and regulate transcription, eukaryotic DNA is bound to histones and packaged into chromatin.
 Eukaryotic DNA may be in a loosely bound, high accessibility state to allow binding factors to access the DNA or
 a tightly bound, low accessibility state that restricts the ability of proteins to access it.
@@ -22,14 +22,18 @@ If chromatin accessibility affects mutation rates, and genomic positions with hi
 This variation could cause differential risk of cancer for different tissues.
 This hypothesis is consistent with the observation that different tissues have different cancer incidence rates.
 While there is some evidence suggesting that chromatin accessibility and mutation rate are connected, the strength of this connection and how it is modified in cancer are unknown.
+This proposal will investigate this relationship and model the effect of increasing chromatin accessibility on local mutation rate.
 
 % A significant impediment to research in this area is a lack of methods for jointly detecting somatic mutations and chromatin accessibility.
-Studies of chromatin accessibility often rely on reference measurements taken in other individuals, which may be different than the levels of chromatin accessibility in the source of the DNA sample. Assay for Transposase Accessible Chromatin by sequencing (ATAC-seq) is an assay of chromatin accessibility that detects differences in chromatin accessibility by using a hyperactive transposase to attach sequencing adaptors directly to the sampled DNA. As the transposase is unable to cut DNA that is bound to nucleosomes, ATAC-seq enables detection of regions that have nucleosome-free, and thus open, chromatin regions.
-As ATAC-seq employs a transposase in the assay, it has a very low cell input requirement compared to other assays of chromatin accessibility. This makes it possible to both genotype and evaluate chromatin accessibility in a single somatic sample.
+Studies of chromatin accessibility often rely on reference measurements taken in other individuals, which may be different than the levels of chromatin accessibility in the source of the DNA sample. The Assay for Transposase Accessible Chromatin by sequencing (ATAC-seq) is an assay of chromatin accessibility that detects differences in accessibility by using a hyperactive transposase to attach sequencing adaptors directly to the sampled DNA. As the transposase is unable to cut DNA that is bound to histones, ATAC-seq enables detection of regions that have nucleosome-free, and thus open, chromatin regions.
+Because ATAC-seq employs a transposase in the assay, it has a very low DNA input requirement compared to other assays of chromatin accessibility. This makes it possible to both genotype and evaluate chromatin accessibility in a single somatic sample.
+I hypothesize that increased chromatin accessibility within the sample significantly increases the insertion/deletion mutation rate of that sample.
+This proposal aims to develop a pipeline capable of utilizing both sequencing data and ATAC-seq data from a single sample to test this hypothesis.
 
 While recent studies suggest open chromatin has an effect on mutation rate, the degree of relationship between chromatin accessibility and mutation rate is unknown.
 Furthermore, it is unknown whether this relationship changes in tumors; and if so, the size of the effect.
-In this experiment I will sequence and assay the chromatin accessibility of mouse intestinal epithelium to determine the effect of increasing chromatin accessibility on mutation rate.
+In this experiment I will sequence and assay the chromatin accessibility of mouse intestinal epithelium in normal and cancer-stricken mice to determine the effect of increasing chromatin accessibility on mutation rate.
+This will provide insight into how an individual develops cancer and how this process changes in different tissues, which will aid in the development of interventions to prevent the disease.
 
 % Cancer genotypes are significantly altered compared to their normal counterparts, and are characterized by large genomic aberrations such as chromosome rearrangements, changes in ploidy number, inversions, and insertion/deletions.
 % On the other hand, mutations in healthy somatic tissue are more subtle and are more likely to contain single nucleotide changes and short changes in microsatellite length.
@@ -38,13 +42,16 @@ In this experiment I will sequence and assay the chromatin accessibility of mous
 % Due to the significant differences in the type and number of somatic mutations between healthy tissue and cancer tumors, current methods are insufficient for detecting somatic mutations in healthy tissue.
 
 \textbf{Aim 1: Develop a bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.}
-This will be done by correcting sequencing errors in Next-Generation Sequencing reads to reduce erroneous genotype calls. In addition to short reads, long Nanopore reads will be corrected and used to detect structural variation.
-Reads generated by an ATAC-seq protocol will incorporated into the pipeline to determine chromatin accessibility within the genotyped somatic tissue.
+This will be done by correcting sequencing errors in Illumina sequencing reads to reduce erroneous genotype calls. In addition to short read sequencing, the sample will be sequenced on the Oxford Nanopore Technologies long read sequencing platform. These long Nanopore reads will be corrected and used to detect structural mutations, which are expected to be a significant proportion of mutations. 
+Reads generated by an ATAC-seq protocol will incorporated into the pipeline to determine chromatin accessibility within the genotyped somatic tissue. This will provide a tool for use by the cancer research community to help understand the link between chromatin accessibility and somatic mutation rate.
 
 \textbf{Aim 2: Test the hypothesis that chromatin accessibility significantly impacts mutation rate.}
 The method developed in Aim 1 will be applied to intestinal epithelium samples from a mouse model of intestinal cancer.
 As a control, it will also be applied to samples of the same tissue in a mouse with a similar, unmanipulated genetic background.
-This will provide a set of mutations and estimates of chromatin accessibility at mutated sites. The mutation rate in open and closed chromatin sites can be compared, likely showing a higher mutation rate in open chromatin regions.
-Logistic regression can also be used to evaluate whether increasing chromatin accessibility values estimated by ATAC-seq correlates with an increased probability of mutation.
+This will provide a set of mutations and estimates of chromatin accessibility at mutated sites. The mutation rate in open and closed chromatin sites can be compared, likely showing a higher insertion/deletion mutation rate in open chromatin regions.
+Logistic regression will also be used to model the effect of increasing chromatin accessibility values estimated by ATAC-seq on mutation rate for different mutation types.
+This relationship is expected to be more extreme in tumors due to the increased genomic instability in cancer cells.
+This will contribute to a more complete understanding of the causes of cancer, which is vital for developing effective preventative interventions and reducing human disease burden.
 
-This project will provide a method for sensitively detecting  mutations in somatic tissues and will fill a knowledge gap regarding the relationship between chromatin structure and mutation rate. It will provide an important resource for researchers in the fields of developmental biology and epigenomics.
+\paragraph{Summary.}
+This project will provide a method for sensitively detecting  mutations in somatic tissues and will fill a knowledge gap regarding the relationship between chromatin structure and mutation rate. It will provide an important resource for researchers in the fields of cancer biology and epigenomics.
