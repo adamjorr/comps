@@ -1,18 +1,20 @@
 \documentclass{beamer}
 \usepackage{tikz}
 \usepackage{graphicx}
+\usepackage[style=nature, citestyle=authoryear]{biblatex}
 \usetikzlibrary{shapes,arrows,calc,positioning}
-
+\bibliography{comps}
 
 \usefonttheme{professionalfonts}
 \usetheme{Boadilla}
 \setbeamertemplate{navigation symbols}{}%remove navigation symbols
 \hypersetup{pdfstartview={Fit}} % fits the presentation to the window when first displayed
 \graphicspath{{./figures/}{../written/}}
+\emergencystretch=1em
 
 %Info
 \title[Chromatin and Mutation]{Evaluating the Relationship between Chromatin State and Mutation Rate in Cancer}
-\titlegraphic{\includegraphics[width=.9\linewidth]{figure.pdf}}
+\titlegraphic{\includegraphics[width=.3\linewidth]{figure.pdf}}
 \date{11/9/17}
 \author{Adam Orr}
 
@@ -20,12 +22,18 @@
 
 \frame{\titlepage}
 
-\begin{frame}{Cancer is a huge health problem}
+\begin{frame}{Cancer is a major health problem}
+\begin{columns}
+\column{.5\textwidth}
 \begin{itemize}
-\item Foo
-\item Bar
-\item Baz
+\item Estimated 1.6 million new cancer cases and 600,000 deaths in 2016 \footnotemark
+\item Cancer is difficult to treat
+\item Many cancers acquire drug resistance \parencite{holohan_cancer_2013}
 \end{itemize}
+\column{.5\textwidth}
+\includegraphics[width=.\linewidth]{}
+\end{columns}
+\footnotetext[1]{\url{https://www.cancer.gov/about-cancer/understanding/statistics}}
 \end{frame}
 
 \begin{frame}{Cancer is believed to be caused by somatic mutations}
@@ -59,10 +67,10 @@
 
 %how do we find mutations?
 
-\begin{frame}{Illumina Sequencing}
+\begin{frame}{Illumina Sequencing is good for detecting SNPs}
 \end{frame}
 
-\begin{frame}{Nanopore Sequencing}
+\begin{frame}{Nanopore Sequencing is good for detecting insertions and deletions}
 \end{frame}
 
 %what do we need to consider for somatic samples?
@@ -99,41 +107,48 @@
 \begin{frame}{Pipeline Validation}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Short Read Correction - Rcorrector}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Long Read Correction - Nanocorr}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Alignment - Minimap2}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Detect Mutations - MuTect2}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Detect Mutations - Nanopolish}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Calculate Chromatin Accessibility - MACS2}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Tissue Collection}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Library Construction}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Statistical Analysis}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Expected Results - Mutation Rates in Open and Closed Chromatin}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Expected Results - Distribution of Chromatin State at Mutated Sites}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Expected Results - Logistic Regression}
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Conclusion}
 \end{frame}
+
+\begin{frame}[t, allowframebreaks]
+\frametitle{References}
+\printbibliography
+\end{frame}
+
+\end{document}
