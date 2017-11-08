@@ -85,8 +85,8 @@ Mutation rates in 1Mb windows across chromosome 1 for different types of mutatio
 \column{.4\textwidth}
 \column{.6\textwidth}
 \includegraphics[width=\linewidth]{song_2010_dnase-seq.png}
-\footnotetext[1]{\cite{song_dnase-seq:_2010}}
 \end{columns}
+\footnotetext[1]{\cite{song_dnase-seq:_2010}}
 \end{frame}
 
 % \begin{frame}{ChIP-seq}
@@ -101,34 +101,44 @@ Mutation rates in 1Mb windows across chromosome 1 for different types of mutatio
 \begin{columns}
 \column{.4\textwidth}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=.8\linewidth]{reznikoff_2003_tn5.png}
 \end{columns}
+\footnotetext[1]{\cite{reznikoff_tn5_2003}}
 \end{frame}
 
 \begin{frame}{ATAC-seq}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
+\includegraphics[width=\linewidth,trim={0 24cm 0 0},clip]{buenrostro_2013_atac.jpg}
+\footnotetext[1]{\cite{buenrostro_transposition_2013}}
 \end{frame}
 
 %how do we find mutations?
 
-\begin{frame}{Illumina Sequencing is good for detecting SNPs}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
+\begin{frame}{Illumina Sequencing is useful for detecting SNPs}
+\includegraphics[width=\linewidth,trim={.5in 2.5cm .5in 14cm},clip]{illumina_techspotlight_p2.pdf}
+\footnotetext[1]{\url{https://www.illumina.com/documents/products/techspotlights/techspotlight_sequencing.pdf}}
 \end{frame}
 
-\begin{frame}{Nanopore Sequencing is good for detecting insertions and deletions}
+\begin{frame}{Illumina Sequencing is useful for detecting SNPs}
+\centering
+\includegraphics[width=.5\linewidth,trim={1in 9cm 4.2in 4in},clip]{illumina_intro_p5.pdf}
+\footnotetext[2]{\url{https://www.illumina.com/content/dam/illumina-marketing/documents/products/illumina_sequencing_introduction.pdf}}
+\end{frame}
+
+
+
+\begin{frame}{Nanopore Sequencing is useful for detecting insertions and deletions}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+\item{A voltage is generated across the membrane containing the nanopore.}
+\item{Molecules that pass through the pore cause a detectable shift in current.}
+\item{$\alpha$-hemolysin is used as a biological pore}
+\item{Helicase is used as a motor}
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth,trim={6cm 0 3cm 0},clip]{nanopore_seq-0.png}
 \end{columns}
+\footnotetext[1]{\url{https://nanoporetech.com/how-it-works}}
 \end{frame}
 
 %what do we need to consider for somatic samples?
@@ -136,66 +146,75 @@ Mutation rates in 1Mb windows across chromosome 1 for different types of mutatio
 \begin{frame}{Heterogeneity is a problem}
 \begin{columns}
 \column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
-\end{frame}
+This can be reduced by careful sampling of tissue
 
-\begin{frame}{Single cell technology a potential solution, but comes with many more problems}
-\begin{columns}
-\column{.4\textwidth}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth]{junttila_2013_heterogeneity.jpg}
 \end{columns}
+\footnotetext[1]{\cite{junttila_influence_2013}}
 \end{frame}
 
 \begin{frame}{Sequencing errors are a problem}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
-\end{frame}
+These errors are caused by
+\begin{itemize}
+\item DNA damage
+\item Mutations during library preparation
+\item Sequencer measurement error
+\end{itemize}
 
-\begin{frame}{Reduce number of PCR steps to reduce errors in library prep}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
+The first two can be minimized by careful DNA extraction methods and minimizing the number of PCR steps required before sequencing.
+
+\vskip 1em
+
+Remaining errors can be corrected \textit{in silico}
 \end{frame}
 
 \begin{frame}{Read correction reduces errors}
 \begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Small amount of source DNA is a problem}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\column{.5\textwidth}
+In short reads:
+\begin{enumerate}
+	\item Create K-mer frequency table
+	\item For every read containing a unique K-mer, change the base to one that will make the K-mer non unique
+\end{enumerate}
+\column{.5\textwidth}
+In long reads:
+\begin{itemize}
+	\item The reads are long enough that there is a significant level of overlap between reads. Use this overlap to find a consensus.
+	\item \textbf{Or} align short reads to the long reads to "polish" the long reads and repair errors.
+\end{itemize}
 \end{columns}
 \end{frame}
 
 %with all this in mind, our aims!
 
-\begin{frame}{How does chromatin accessibility correlate with mutation rate in the same tissue? How does it change in cancer?}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
+\begin{frame}{Aims}
+How does chromatin accessibility correlate with mutation rate in the same tissue? How does it change in cancer?
+
+\vskip 1em
+
+\textbf{Aim 1}: Develop a bioinformatic pipeline to detect somatic mutations and estimate chromatin accessibility across the genome in somatic samples.
+\begin{itemize}
+	\item Use long reads for structural variation, short reads for single nucleotide changes
+	\item Error correct reads
+\end{itemize}
+
+\vskip 1em
+
+\textbf{Aim 2}: Test the hypothesis that chromatin accessibility significantly impacts mutation rate.
+\begin{itemize}
+	\item Poisson test
+	\item Non-parametric test of ATAC-seq enrichment at mutated sites
+	\item Logistic regression of ATAC-seq enrichment
+\end{itemize}
 \end{frame}
 
 %pipeline stuff
 %for the pipeline, do left half text, right half highlight the part of the pipeline we're talking about
 
 \begin{frame}{Pipeline Overview}
-\includegraphics[width=\linewidth]{figure.pdf}
+\centering
+\includegraphics[width=.7\linewidth]{figure.pdf}
 \end{frame}
 
 \begin{frame}{Pipeline Validation}
@@ -207,24 +226,62 @@ Mutation rates in 1Mb windows across chromosome 1 for different types of mutatio
 \end{frame}
 
 \begin{frame}{Short Read Correction - Rcorrector}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Long Read Correction - Nanocorr}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Alignment - Minimap2}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Detect Mutations - MuTect2}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Detect Mutations - Nanopolish}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Calculate Chromatin Accessibility - MACS2}
+\begin{columns}
+\column{.4\textwidth}
+\column{.6\textwidth}
+% \includegraphics[width=\linewidth]{}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Tissue Collection}
+\begin{columns}
+\column{.5\linewidth}
+\includegraphics[width=\linewidth]{alonso_2003_skin.jpg}
+\column{.5\linewidth}
+\includegraphics[width=\linewidth]{casali_2009_intestine.jpg}
+\end{columns}
+\footnotetext[1]{\cite{alonso_stem_2003}}
+\footnotetext[2]{\cite{casali_intestinal_2009}}
 \end{frame}
 
 \begin{frame}{Library Construction}
