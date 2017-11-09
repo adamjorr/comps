@@ -14,7 +14,7 @@
 
 %Info
 \title[Chromatin and Mutation]{Evaluating the Relationship between Chromatin State and Mutation Rate in Cancer}
-\titlegraphic{\includegraphics[width=.3\linewidth]{figure.pdf}}
+\titlegraphic{\includegraphics[width=.3\linewidth]{logistic_regression.pdf}}
 \date{11/9/17}
 \author{Adam Orr}
 
@@ -174,8 +174,9 @@ Remaining errors can be corrected \textit{in silico}
 \column{.5\textwidth}
 In short reads:
 \begin{enumerate}
-	\item Create K-mer frequency table
-	\item For every read containing a unique K-mer, change the base to one that will make the K-mer non unique
+	\item Create De Bruijn graph and K-mer count table
+	\item Determine a global threshold and local threshold
+	\item For every read containing a K-mer with a count lower than the threshold, make the minimum number of changes to the kmers to make them higher than the threshold.
 \end{enumerate}
 \column{.5\textwidth}
 In long reads:
@@ -203,7 +204,7 @@ How does chromatin accessibility correlate with mutation rate in the same tissue
 
 \textbf{Aim 2}: Test the hypothesis that chromatin accessibility significantly impacts mutation rate.
 \begin{itemize}
-	\item Poisson test
+	\item Poisson test of mutation rate in "open" and "closed" regions
 	\item Non-parametric test of ATAC-seq enrichment at mutated sites
 	\item Logistic regression of ATAC-seq enrichment
 \end{itemize}
@@ -218,88 +219,154 @@ How does chromatin accessibility correlate with mutation rate in the same tissue
 \end{frame}
 
 \begin{frame}{Pipeline Validation}
+%TODO: specify cell lines
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+\item Genotype and ATAC-seq independent intestinal cell lines.
+\item Mix the cell lines, then run the pipeline to evaluate effectiveness.
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth]{pipe_validation.pdf}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Short Read Correction - Rcorrector}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+\item Fix sequencing errors to reduce false positive mutation calls
+\item Do this by changing low-abundance kmers to high-abundance kmers
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth,trim={4cm 13cm 2cm 0},clip]{figure.pdf}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Long Read Correction - Nanocorr}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+	\item BLAST each short read to long reads
+	\item Fix long reads using aligned short reads
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth,trim={4cm 12cm 8cm 0},clip]{figure.pdf}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Alignment - Minimap2}
+\includegraphics[width=\linewidth,trim={0 9cm 0 4cm},clip]{figure.pdf}
+\begin{itemize}
+	\item Split the reference into windows, and for a fixed kmer size, rank the kmers and pick the smallest.
+	\item This is the \textit{minimizer}
+	\item The \textit{minimizer} of a query is used to find the a match in a large reference database, and extended 
+\end{itemize}
+\end{frame}
+
+% MuTect2 detects mutations by modeling the likelihood of the 3 possible mutations with a uniform error rate and considering any base where the log ratio of the likelihood of a true mutation of that base to no mutation exceeds a threshold. It then estimates the fraction of the sample containing the mutation; if it is sufficiently large, the mutation is emitted.
+\begin{frame}{Detect Mutations in Short Reads - MuTect2}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+	\item Ignore sites that are similar to control sample
+	\item Calculate likelihood of a mutation for each non-reference base exists at frequency \textit{f}, $L(M^m_f)$
+	\item Determine whether $\log_{10} \frac{L(M^m_f)}{L(M_0)}$ exceeds a threshold
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth,trim={6cm 4cm 2cm 7cm},clip]{figure.pdf}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Detect Mutations - MuTect2}
+\begin{frame}{Detect Mutations in Long Reads - Nanopolish}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+	\item Use electrical signals and a Hidden Markov Model to detect variants
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Detect Mutations - Nanopolish}
-\begin{columns}
-\column{.4\textwidth}
-\column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\centering
+\includegraphics[width=.7\linewidth,trim={2cm 2cm 10cm 5cm},clip]{figure.pdf}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Calculate Chromatin Accessibility - MACS2}
 \begin{columns}
 \column{.4\textwidth}
+\begin{itemize}
+	\item In a sliding window count:
+	\begin{itemize}
+		\item ATAC reads
+		\item control sequencing reads
+	\end{itemize}
+	\item A Poisson rate ratio test is performed to see if the count of ATAC reads non-randomly exceeds the count of control reads.
+\end{itemize}
 \column{.6\textwidth}
-% \includegraphics[width=\linewidth]{}
+\includegraphics[width=\linewidth,trim={0 4cm 8cm 8cm},clip]{figure.pdf}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Tissue Collection}
+\begin{frame}{Aim 2 - Tissue Collection}
 \begin{columns}
 \column{.5\linewidth}
-\includegraphics[width=\linewidth]{alonso_2003_skin.jpg}
+\includegraphics[width=\linewidth,trim={0 0 22cm 0},clip]{alonso_2003_skin.jpg}
 \column{.5\linewidth}
-\includegraphics[width=\linewidth]{casali_2009_intestine.jpg}
+\includegraphics[width=\linewidth,trim={0 0 4.2cm 0},clip]{casali_2009_intestine.jpg}
 \end{columns}
 \footnotetext[1]{\cite{alonso_stem_2003}}
 \footnotetext[2]{\cite{casali_intestinal_2009}}
 \end{frame}
 
-\begin{frame}{Library Construction}
-\end{frame}
-
 \begin{frame}{Statistical Analysis}
+Interesting questions to test for an association and model it for SNPs, insertions, and deletions:
+\begin{enumerate}
+	\item Is the mutation rate different in "open" and "closed" chromatin regions?
+	\item Is the distribution of accessibility enrichment by ATAC-seq different in a cancer-afflicted sample?
+	\item Does chromatin accessibility predict mutation probability in a logistic regression?
+\end{enumerate}
 \end{frame}
 
 \begin{frame}{Expected Results - Mutation Rates in Open and Closed Chromatin}
+\begin{columns}
+\column{.5\linewidth}
+A Poisson rate test can be used to determine if the ratio of the rate parameters is 1.
+
+\vskip 1em
+
+The quantity $P(X_1 | X_1 + X_2 = k)$ is Binomially distributed with $k$ trials and $p$ parameter $\frac{\frac{n_1}{n_2}}{1 + \frac{n_1}{n_2}}$ when the rate ratio is 1.
+\column{.5\linewidth}
+\includegraphics[width=\linewidth]{mut_rate.pdf}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Expected Results - Distribution of Chromatin State at Mutated Sites}
+\begin{columns}
+\column{.5\linewidth}
+A 2-sample Anderson-Darling test can evaluate whether two samples were sampled from the same distribution.
+\column{.5\linewidth}
+\includegraphics[width=\linewidth]{chr_state.pdf}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Expected Results - Logistic Regression}
+\begin{columns}
+\column{.5\linewidth}
+A logistic regression regresses a binary response variable against a continuous one
+
+\vskip 1em
+
+An analysis of deviance can then be used to determine if the effect is significant.
+
+\column{.5\linewidth}
+\includegraphics[width=\linewidth]{logistic_regression.pdf}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Conclusion}
+\begin{itemize}
+	\item The pipeline presented here enables analysis of mutation and chromatin accessibility from a single somatic sample
+	\item Genotyping and ATAC-seq of single somatic tissue will help elucidate the role of somatic mutation in cancer incidence
+\end{itemize}
 \end{frame}
 
 \begin{frame}[t, allowframebreaks]
