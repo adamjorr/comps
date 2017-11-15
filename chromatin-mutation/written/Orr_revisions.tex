@@ -1,0 +1,68 @@
+\input{header}
+
+\begin{document}
+
+% As your proposed dissertation project focuses on error profiles of NGS alignments, briefly explain how the most widely-used error correction algorithms work (i.e., k-spectrum-based approaches vs suffix-tree/array-based methods), thereby highlighting their differences/advantages/disadvantages.
+
+%methods assume errors are rare and random
+
+%================
+%k-spectrum-based
+%================
+% a table of k-mers and the number of times they occur in the read set is created
+% some count threshold is calculated to distinguish between low frequency "untrusted" kmers versus high frequency "trusted" kmers
+% the calculation of this threshold differs in different implementations.
+% reads containing an untrusted kmer are repaired with the minimum number of changes to turn all its kmers into trusted kmers.
+
+%----------------
+% * advantages
+%----------------
+% low memory requirement
+
+%----------------
+% * disadvantages
+%----------------
+% new data structure must be created for every value of k
+
+%================
+%suffix-tree/array-based
+%================
+% suffix tree is data structure holding every possible suffix from every read in the read set, along with how frequent each suffix is.
+% the tree is searched for low frequency nodes, which represent infrequent suffixes due to errors.
+
+%suffix array attempts to reduce the memory requirements of a full suffix tree by storing only an array of all possible suffixes along with an array of the longest common prefix of the previous suffix.
+
+%----------------
+% * advantages
+%----------------
+% can quickly get k-mer frequencies for any k from only one structure
+% allows rapid optimization of k
+
+%----------------
+% * disadvantages
+%----------------
+% requires a lot of memory
+
+%================
+%major differences between the two method types
+%================
+
+%both call 
+
+
+\section{Question 1}
+
+
+% Address the issue of variation in coverage, specifically, how this could confound your analyses and how to correct for it.
+\section{Question 2}
+
+% Describe the details of how biological variation (e.g., a diploid versus a non-diploid genome; inbred vs outbred; types of tissues compared) might affect the components of your pipeline (e.g. the QC part - FastQC, Timmomatic, and the variant calling/error correction), given the algorithms on which they are based work.
+\section{Question 3}
+
+
+% Describe the model used by MuTect2 to genotype somatic mutations including (1) assumptions made, (2) parameters used, (3) calculations performed, (4) choice of default parameters, and (5) metrics used to call a mutation or not.
+\section{Question 4}
+
+
+
+\end{document}
