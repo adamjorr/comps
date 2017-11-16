@@ -1,4 +1,10 @@
 \input{header}
+\bibliography{comps_revisions.bib}
+
+%add line at half page for reference
+\usepackage{eso-pic}
+\AddToShipoutPictureBG{%
+    \AtTextCenter{\hspace{-0.5\textwidth}\rule{\textwidth}{0.5pt}}}
 
 \begin{document}
 
@@ -51,7 +57,36 @@
 
 
 \section{Question 1}
+Error correction methods make two assumptions to detect and correct errors in NGS reads: 1) errors are rare and 2) errors are random. Under these assumptions, errors can be corrected by looking at every called base sequenced from the same true base and changing those that occur with sufficiently small frequency to one with higher frequency.
+To do this, the bases at each position must be piled up to determine the frequency of each nucleotide.
 
+To make the methods independent of a reference genome, which may lead to improper corrections due to alignment errors, the substrings of reads are compared to the substrings present in other reads to estimate the frequency of each called nucleotide at each site.
+Substrings that likely do not contain errors are called "trusted", and those that likely do are called "untrusted".
+Different methods for error correction differ in how the substrings are compared, the data structures and compression methods used to store the substring information, and the statistics used to determine when a substring is trusted or untrusted.
+Recently developed error correction methods fall into one of two major categories: \textit{k}-spectrum methods and suffix-tree/array methods.
+
+\textit{k}-spectrum error correction methods split each read in the dataset into its component \textit{k}-mers, or substrings of length \textit{k}. The number of occurences of each \textit{k}-mer is counted and stored, along with the reads that contain that \textit{k}-mer. Note that this must be done for a user-defined value of \textit{k}, and if the user wishes to change this value, the table creation process must be repeated.
+The frequency of each \textit{k}-mer estimates the sequencing depth at the sites that \textit{k}-mer covers. Thus, \textit{k}-mers that contain errors will occur very infrequently compared to those without errors.
+The distribution of \textit{k}-mer counts generated this way is generally bimodal, with erroneous \textit{k}-mers forming a peak at very low counts, a peak representing true \textit{k}-mers at higher counts, and possibly further peaks representing \textit{k}-mers from regions of repetitive DNA. \textit{k}-spectrum methods determine a count treshold that reads must exceed to be considered trusted.
+
+Different methods determine this cutoff differently; for example,
+% EULER-SR \parencite{chaisson_short_2008} estimates the average coverage, models that with a Poisson distribution, and sets the cutoff such that only a small percentage of correct \textit{k}-mers are untrusted.
+ALLPATHS \parencite{butler_allpaths:_2008} uses the two modes present in the \textit{k}-mer count distribution to model a Poisson distribution for untrusted \textit{k}-mers and a separate model for trusted \textit{k}-mers. Under this model, the cutoff that captures the most erroneous \textit{k}-mers and the least correct \textit{k}-mers is the smallest count with the lowest frequency that appears between the two peaks.
+
+% Rcorrector, used the proposed pipeline, is a \textit{k}-spectrum approach that uses a read-specific and \textit{k}-mer specific threshold to avoid mistakenly classifying low-coverage \textit{k}-mers as erroneous. Rcorrector takes a subset of high-frequency \textit{k}-mers and calculates the ratio of the highest and second-highest counts of the \textit{k}-mer following it in a De Bruijn graph of the reads. It then chooses the smallest ratio larger than 95\% of these ratios as the global parameter $\alpha$.
+% Let $t$ be the largest count of the \textit{k}-mer following the questionable \textit{k}-mer in the De Bruijn graph.
+% The \textit{k}-mer is untrusted if its count is less than $g(t) = \alpha t + 6\sqrt{\alpha t}$.
+% This means the threshold is chosen based on the ability to distinguish the \textit{k}-mer from one containing an error, which is expressed in $\alpha$.
+% Additionally, any \textit{k}-mer in a read is untrusted if its count is less than the value of $g$ for the first \textit{k}-mer in that read that is half as frequent as the previous \textit{k}-mer when the \textit{k}-mers of the read are ranked by decreasing frequency. 
+
+After classifying \textit{k}-mers as trusted or untrusted, those that are untrusted are converted to those that are trusted to repair the error. If a read contains too many errors, it is discarded. Errors are repaired by making the minimum number of changes to bases in the read such that all the untrusted \textit{k}-mers become trusted.
+
+Suffix-tree and suffix-array based approaches use the set of all suffixes of all reads, rather than substrings of fixed length, to detect and repair errors. Suffix trees are trees where each node represents a nucleotide and each edge represents the next nucleotide in one of the suffixes. Since this tree represents every possible substring in every read in the data set, it uses more memory than the \textit{k}-mer count tables used in \textit{k}-spectrum approaches. However, the data structure only needs to be calculated once, even if multiple substring sizes are considered when correcting the reads.
+
+In a suffix tree, the number of occurrences of the substring given by concatenating the characters from the root to an internal node is equal to the number of leaves of the subtree rooted at that node. The level in the tree of this node is equivalent a \textit{k}-mer, with \textit{k} equal to the depth of the node. The expected number of occurrences of the substring is binomially distributed; if this actual number of occurrences is lower than a user-defined cutoff, the base represented by the node is considered erroneous. If the sibling of the erroneous node is error-free, the subtrees can be merged, and all reads changed to reflect the correct base. This method is implemented in the SHREC package \parencite{schroder_shrec:_2009}.
+
+The suffix array is similar to the suffix tree, but uses less memory. Rather than storing the entire tree, an array of suffixes is created along with an array of common prefixes. If an error occurs at the first base in a suffix, it will have the same prefix as the non-erroneous base, but will occur less frequently. Suffix arrays have much of the same functionality as suffix trees, but use less memory.
+Thus, \textit{k}-spectrum methods use less memory but can only consider substrings of a single value while suffix tree and suffix array methods use more memory but can optimize correction using multiple substring lengths.
 
 % Address the issue of variation in coverage, specifically, how this could confound your analyses and how to correct for it.
 \section{Question 2}
