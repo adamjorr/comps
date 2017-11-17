@@ -90,6 +90,20 @@ Thus, \textit{k}-spectrum methods use less memory but can only consider substrin
 
 % Address the issue of variation in coverage, specifically, how this could confound your analyses and how to correct for it.
 \section{Question 2}
+Random variation in coverage can affect my analysis by contributing to mistakes in error correction, inaccuracy in determining the degree of chromatin accessibility, and inaccuracy in mutation detection. During error correction, true variation that is infrequently sampled can be mistaken for a sequencing error. During ATAC-seq peak calling, random variation in coverage can cause over or underestimation of the true accessibility at a site. During mutation detection, low coverage can cause sequencing errors to seem like true mutations and failure to detect true mutations because they weren't sampled. Errors in ATAC-seq peak calling and mutation detection will result in incorrect conclusions during data analysis. Therefore, the software used in the pipeline will be chosen to minimize the impact of variable coverage on error correction, controls will be used for the chromatin accessibility assay, and pipeline validation will be used to detect when coverage adversely impacts the variant calling accuracy of the pipeline. Regions where coverage is too low will then be excluded from the analysis.
+
+There are many different methods available for error correction. Most of these methods rely on having relatively consistent coverage to correctly estimate when a base call occurs at low enough frequency to be considered an error. This becomes problematic when coverage is variable, and infrequently sampled variation can be mistakenly identified as an error. However, the error correction software used in this analysis, Rcorrector \parencite{song_rcorrector:_2015}, is designed for use in RNA-seq and therefore attempts to be robust to variation in coverage.
+It does this by defining a global threshold for \textit{k}-mer frequency while also defining a read-level threshold.
+
+Briefly, Rcorrector works by taking a subset of the highest frequency \textit{k}-mers and defining a \textit{k}-mer threshold based on the ratio of these \textit{k}-mers to the frequency of a \textit{k}-mer that is different by one nucleotide. The read-level threshold is calculated by ranking the counts of the \textit{k}-mers in the read; if there is a two-fold change in the count of this list of \textit{k}-mers, the threshold of that \textit{k}-mer is used as the read-level threshold. Any read with a \textit{k}-mer that has a count lower than the \textit{k}-mer threshold or the read-level threshold is marked for correction. Ultimately, this approach helps prevent false positive error detections in regions sequenced at low coverage.
+
+For accurately detecting ATAC-seq peaks, a sequencing control is used.
+Regions are only determined to be significantly accessible if the null hypothesis that the number of ATAC-seq reads is equal to the number of reads derived from the standard whole-genome sequencing library.
+For this analysis, the ATAC-seq reads are normalized by the number of reads in the sequencing control.
+If some confounding factor that increases sequencing coverage in a particular region, it would be enhanced in both the control and ATAC-seq reads. This means that the enrichment of ATAC-seq reads relative to the control reads would not be significantly impacted.
+
+Variation in coverage would likely have the largest impact on the ability to call mutations in low-coverage regions. For this reason, many people use a coverage cutoff, and only attempt to analyze regions that exceed a particular coverage threshold. Part of the development of the pipeline involves sequencing a heterogeneous mixture of two cell lines with known genotypes. The "mutations" called from sequencing this mixture are therefore from the cell line that makes up the minor fraction of the mixture, and true mutations will match the genotype of this cell line. The accuracy of the pipeline will be evaluated by comparing the called mutations with the true genotype of this cell line. The accuracy of the pipeline at different coverage levels can then be determined, and the level of coverage at which the pipeline begins to perform poorly can be used as the coverage cutoff. Regions that do not have sufficient coverage for accurate mutation detection can then be excluded from the analysis.
+
 
 % Describe the details of how biological variation (e.g., a diploid versus a non-diploid genome; inbred vs outbred; types of tissues compared) might affect the components of your pipeline (e.g. the QC part - FastQC, Timmomatic, and the variant calling/error correction), given the algorithms on which they are based work.
 \section{Question 3}
@@ -98,6 +112,7 @@ Thus, \textit{k}-spectrum methods use less memory but can only consider substrin
 % Describe the model used by MuTect2 to genotype somatic mutations including (1) assumptions made, (2) parameters used, (3) calculations performed, (4) choice of default parameters, and (5) metrics used to call a mutation or not.
 \section{Question 4}
 
+MuTect2 \parencite{cibulskis_sensitive_2013} is an adaptation of the MuTect SNP caller that performs local realignment like the Genome Analysis Toolkit's (GATK) HaplotypeCaller germline variant caller to call insertions and deletions. It is designed to detect mutations in cancer samples and to be robust to heterogeneity by detecting mutations that occur at low sample frequency.
 
 
 \end{document}
