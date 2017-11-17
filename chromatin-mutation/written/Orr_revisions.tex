@@ -112,7 +112,8 @@ Variation in coverage would likely have the largest impact on the ability to cal
 % Describe the model used by MuTect2 to genotype somatic mutations including (1) assumptions made, (2) parameters used, (3) calculations performed, (4) choice of default parameters, and (5) metrics used to call a mutation or not.
 \section{Question 4}
 
-MuTect2 \parencite{cibulskis_sensitive_2013} is an adaptation of the MuTect SNP caller that performs local realignment like the Genome Analysis Toolkit's (GATK) HaplotypeCaller germline variant caller to call insertions and deletions. It is designed to detect mutations in cancer samples and to be robust to heterogeneity by detecting mutations that occur at low sample frequency.
+MuTect2 \parencite{cibulskis_sensitive_2013} is an adaptation of the MuTect SNP caller that performs local realignment like the Genome Analysis Toolkit's (GATK) HaplotypeCaller germline variant caller to call insertions and deletions. It is designed to detect mutations in cancer samples and to be robust to heterogeneity by detecting mutations that occur at low sample frequency. The inputs of MuTect2 are: a BAM file of aligned tumor reads, a BAM file containing aligned reads from a matched normal sample, and optionally a VCF file containing variants to white-list (such as from the COSMIC database) or variants to black-list (such as from dbSNP). 
 
+The first assumptions MuTect2 makes is that optical duplicates in the BAM file have been marked and base quality scores are recalibrated. This means that the reads should be fairly independent and the quality scores should somewhat accurately reflect the probability that the sequenced base is an error.
 
 \end{document}
