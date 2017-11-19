@@ -107,6 +107,20 @@ Variation in coverage would likely have the largest impact on the ability to cal
 
 % Describe the details of how biological variation (e.g., a diploid versus a non-diploid genome; inbred vs outbred; types of tissues compared) might affect the components of your pipeline (e.g. the QC part - FastQC, Timmomatic, and the variant calling/error correction), given the algorithms on which they are based work.
 \section{Question 3}
+%ploidy differences
+%heterozygosity (inbred v outbred)
+%tissue type compared (heterogeneity, amount of true variation detectable)
+
+%fastqc
+%trimmomatic
+%error correction - Rcorrector
+%error correction - Nanocorr
+%variant calling - MuTect2 (triallelic sites problematic)
+%variant calling - Nanopolish
+%accessibility - MACS
+
+Overall, any source of excess biological variation increases the likelihood of error during the analysis. 
+
 
 
 % Describe the model used by MuTect2 to genotype somatic mutations including (1) assumptions made, (2) parameters used, (3) calculations performed, (4) choice of default parameters, and (5) metrics used to call a mutation or not.
@@ -114,6 +128,29 @@ Variation in coverage would likely have the largest impact on the ability to cal
 
 MuTect2 \parencite{cibulskis_sensitive_2013} is an adaptation of the MuTect SNP caller that performs local realignment like the Genome Analysis Toolkit's (GATK) HaplotypeCaller germline variant caller to call insertions and deletions. It is designed to detect mutations in cancer samples and to be robust to heterogeneity by detecting mutations that occur at low sample frequency. The inputs of MuTect2 are: a BAM file of aligned tumor reads, a BAM file containing aligned reads from a matched normal sample, and optionally a VCF file containing variants to white-list (such as from the COSMIC database) or variants to black-list (such as from dbSNP). 
 
-The first assumptions MuTect2 makes is that optical duplicates in the BAM file have been marked and base quality scores are recalibrated. This means that the reads should be fairly independent and the quality scores should somewhat accurately reflect the probability that the sequenced base is an error.
+The first assumptions MuTect2 makes is that optical duplicates in the BAM file have been marked and base quality scores are recalibrated. This means that the reads should be fairly independent and the quality scores should accurately reflect the probability that the sequenced base is an error. Additionally, MuTect2 assumes all sequencing errors are independent across reads and substitutions of each type occur with equal probability.
+The original implementation of MuTect also made the assumption that the read was correctly aligned to the reference; however, MuTect2 realigns reads in a region before calling and emitting variants using the algorithm implemented in the GATK HaplotypeCaller tool. The genotyping model used by MuTect2 then assumes reads are properly mapped.
+
+% It does this by building a De Bruijn graph of the reads in a region to reassemble it. Two graphs are constructed: one using \textit{k}-mers of size 10 and another using \textit{k}-mers of size 25. If a cycle is formed in the De Bruijn graph or the number of unique \textit{k}-mers is greater than 25\% of \textit{k}-mers in the graph, the largest \textit{k} is incremented by 10, and another attempt to form the graph is made. If this fails 6 times, the region is ignored.
+
+% It also traverses this graph searching for divergent paths that represent haplotypes present in the sample. These haplotype sequences are then realigned to the reference using the Smith-Waterman algorithm, and the reads altered to include gaps.
+
+MuTect2 considers many more potential mutations than it emits. To decide whether a site contains a putative mutation, MuTect2 calculates the log ratio of likelihoods of a model containing a mutation at frequency $f$ and a model where no mutation occurred (that is, $f = 0$). The likelihood of a mutation $m$ occurring at frequency $f$ with reference allele $r$ sequenced at depth $d$ with bases $b_i$ and probability of error $e_i$ is $L(M_f^m)=P({b_i}|{e_i},r,m,f)=\prod_{i=1}^{d} P(b_i|e_i,r,m,f)$ and 
+
+$$
+P(b_i|e_i,r,m,f)=
+\begin{cases}
+f^{e_i/3}+(1-f)(1-e_i) & \text{if } b_i=r \\
+f(1-e_i) + (1-f)^{e_i/3} & \text{if } b_i=m \\
+e_i/3 & \text{otherwise}
+\end{cases}
+$$
+
+Here, $f$ is estimated to be $\frac{\text{number of reads matching }m}{d}$.
+If the log ratio of this model exceeds a threshold $\delta{}_T$, that is: $LOD_T(m,f)=\log_{10} \left(\frac{L(M_f^m)P(m,f)}{L(M_0)(1-P(m,f))}\right)$ , then $m$ is considered a candidate variant. This is simplified using the assumptions that mutations are uniform so $P(f)=1$, and that $P(m)$ is independent from $P(f)$. Thus, a mutation is considered if $LOD_T(m,f)=\log_{10} \left(\frac{L(M_f^m)}{L(M_0)}\right) \geq \log_{10} \delta{} - \log_{10}  \left(\frac{P(m)}{1-P(m)}\right) = \theta{}_T$. MuTect2 assumes a typical tumor frequency is $3 \times 10^{-6}$, so the default value of $\theta{}_T$ is 6.3. This parameter can be changed during invocation of the software.
+
+Potential mutations that exceed this threshold are then filtered. MuTect2 rejects variants that fall within 5 base-pairs of an insertion or deletion supported by 3 or more reads. If over half the reads that cover the site have a mapping quality of 0, the mutation is rejected. If there is not a read that covers the site and supports the mutation with a mapping quality score above 20, the mutation is rejected. Triallelic sites are also rejected. To determine whether a false positive is due to a strand-biased sequencing error, the reads overlapping a potential mutation are split into two subsets, one for each direction. The LOD score is then recalculated for the two sets; if this score is < 2 in either direction while the subset still maintains over 90\% sensitivity, the mutation is rejected. The sensitivity to detect a mutation is given by $\sum_{i=k}^d \text{binom}(i|d,f(1-e)+(1-f)e)$, where $k$ is the minimum number of reads supporting a mutant allele required such that the LOD score is greater than $\theta{}_T$. Candidate mutations are also removed if the median distance between the mutation and the start or end of the read is less than or equal to 10, or if the median absolute deviation from the start or end of the read is less than or equal to 3. Finally, a variant is rejected if it appears too many times in the control sample (2 or more times or over 3\% of the reads) and the sum of the quality scores of those reads is over 20.
+
+Mutations that pass filtering are categorized as somatic or germline and then emitted. To do so, a LOD score is calculated as above; however, this time the model that the variant does not exist is tested against the model that the the variant is a heterozygous germline variant; that is, $LOD_N=\log_{10} \left(\frac{L(M_0)P(m,f)}{L(M_{0.5}^m)P(\text{germ line})}\right) \geq \log_{10} \delta{}_N$. If this is the case, the mutation is more likely to be somatic than germline. By default, MuTect2 sets a high threshold to avoid misclassifying germline events as somatic. To do so, it sets $\delta{}_N = 10$ to calculate the default threshold $\theta{}_N$. Rewriting the LOD equation as $LOD_N = \log_{10} \left(\frac{L(M_0)}{L(M_{0.5}^m)}\right) \geq \log_{10} \delta{}_N - \log_{10} \left(\frac{P(m)}{P(\text{germ line})}\right) = \theta{}_N$. $P(m)$ is calculated as above; to calculate $P(\text{germline})$, MuTect2 considers two categories of sites: known variants in dbSNP, and other sites. There are about $30 \times 10^6$ variant sites in dbSNP, which is on average 1000 variants/Mb. An estimated 5\% of an individual's variants are not in dbSNP; thus, P(germline|non-dbSNP site) = $5 \times 10^{-5}$ and P(germline|dbSNP site) = $0.095$. This gives two thresholds for categorizing variants: $\theta{}_{N|non-dbSNP site} = 2.2$ and $\theta{}_{N|dbSNP site} = 5.5$
 
 \end{document}
