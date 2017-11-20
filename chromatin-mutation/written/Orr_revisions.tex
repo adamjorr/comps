@@ -119,9 +119,18 @@ Variation in coverage would likely have the largest impact on the ability to cal
 %variant calling - Nanopolish
 %accessibility - MACS
 
-Overall, any source of excess biological variation increases the likelihood of error during the analysis. 
+Overall, any source of excess biological variation increases the likelihood of error during the analysis, as biological variation makes somatic variation more difficult to distinguish from this background variation and sequencing error. Most steps in the pipeline should be fairly robust to biological variation, but others are more affected.
 
+The read quality control steps will be least impacted by biological variation. FastQC checks the sequencing reads for adapters, overrepresented \textit{k}-mers, flowcell-related quality issues, low per-base quality scores, low mean quality scores, bias in sequenced base per site, biased GC content, high read N content, missing reads, an unusually large proportion of duplicated reads, and an unusually large number of duplications of a single read. These checks will not significantly depend on biological variation except the potential for overrepresented \textit{k}-mers or duplicate reads that can result from genomes with a large number of duplications. Trimmomatic is likely not significantly affected either; it searches for adapter sequences present in the reads and removes them. Additionally, Trimmomatic scans forward and reverse reads for evidence of adapter sequences caused by short insert sizes, causing the sequence of the opposite adapter to be present in the forward and reverse reads. This will not be significantly impacted by biological variation.
 
+% FastQC and Trimmomatic can both falsely detect reads  if the sample contains DNA similar to Illumina adapters. This shouldn't be an issue, since the adapters are designed to be distinct from natural sequences, but should be considered.
+
+On the other hand, the read correction steps will be impacted by biological variation. Rcorrector uses \textit{k}-mer frequencies in reads to identify low frequency \textit{k}-mers that may be errors and correct them. Though Rcorrector is designed to work even with nonuniform coverage, it may be affected by nonuniform coverage that results from changes in ploidy. Increased heterozygosity in outbred strains may also affect this, as one allele may be sampled less frequently than the other, making that allele erroneously appear as an error, increasing the false negative rate of the mutation detection component of the pipeline. True heterogeneity present in the sampled tissue would affect error correction similar to increased heterozygosity; infrequently sampled variants would not be detected, and may possibly be counted as evidence for a different nucleotide. For small amounts of heterogeneity that would not significantly impact the conclusions; however, for high levels of tissue heterogeneity, the effect would be significant. Errors made during Illumina error correction would then be propagated to the nanopore reads when corrected using Nanocorr, as Nanocorr uses the consensus of the short read sequences to edit the long reads.
+
+%MuTect2 and Nanopolish
+The variant detection step will be the component of the pipeline most affected by biological variation. Variant detection will suffer due to high ploidy, high amounts of heterozygosity, and choice of compared tissues.
+
+%MACS2
 
 % Describe the model used by MuTect2 to genotype somatic mutations including (1) assumptions made, (2) parameters used, (3) calculations performed, (4) choice of default parameters, and (5) metrics used to call a mutation or not.
 \section{Question 4}
